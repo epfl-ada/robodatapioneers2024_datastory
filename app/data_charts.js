@@ -9,7 +9,7 @@ function TimeChartComponent() {
 
 	useEffect(() => {
 		const loadData = async () => {
-			const response = await fetch("/data.csv");
+			const response = await fetch("./data.csv");
 			const reader = response.body.getReader();
 			const result = await reader.read();
 			const decoder = new TextDecoder("utf-8");
@@ -118,7 +118,7 @@ function TimeChartComponent() {
 function ChartComponent() {
 	useEffect(() => {
 		const loadData = async () => {
-			const response = await fetch("/data.csv");
+			const response = await fetch("./data.csv");
 			const reader = response.body.getReader();
 			const result = await reader.read();
 			const decoder = new TextDecoder("utf-8");
