@@ -3,6 +3,7 @@ const isProd = process.env.NODE_ENV === "production";
 const repoName = "/robodatapioneers2024_datastory";
 
 const nextConfig = {
+	reactStrictMode: true,
 	output: "export",
 	images: {
 		unoptimized: true,
