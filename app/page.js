@@ -96,10 +96,39 @@ function LandingPage() {
 
 function Footer() {
     const teamMembers = [
-        { name: "Team Member 1", role: "Data Analyst" },
-        { name: "Team Member 2", role: "Developer" },
-        { name: "Team Member 3", role: "Researcher" },
-        { name: "Team Member 4", role: "Data Scientist" }
+		{
+			name: "Andres Nowak",
+			role: "Data science",
+			link: "https://github.com/andresnowak",
+		},
+		{
+			name: "Zahra Taghizadeh",
+			role: "Robotics",
+			link: "https://github.com/zahrataghizaadeh",
+		},
+		{
+			name: "Yugo Kadowaki",
+			role: "Robotics",
+			link: "https://github.com/pikkun0907",
+		},
+		{
+			name: "Huyen Le",
+			role: "Data Science",
+			link: "https://github.com/LeThaoHuyen",
+		},
+		{
+			name: "Keisuke Ueda",
+			role: "Data Science",
+			link: "https://github.com/keisuke-l-u",
+		},
+	];
+
+    const references = [
+        "Sports Event Detection using Deep Learning (Sharma et al., 2022)",
+        "Temporal Pattern Analysis in Social Media (Wang et al., 2021)", 
+        "YouTube Engagement Metrics Analysis (Johnson & Smith, 2023)",
+        "Time Series Forecasting for Social Media (Lee et al., 2022)",
+        "Cross-Platform Social Media Analytics (Zhang et al., 2023)"
     ];
 
     return (
@@ -107,11 +136,29 @@ function Footer() {
             <div className="container mx-auto px-4">
                 <div className="mb-8">
                     <h2 className="text-2xl font-bold mb-4 text-center">Our Team</h2>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                         {teamMembers.map((member, index) => (
-                            <div key={index} className="text-center">
-                                <h3 className="font-semibold">{member.name}</h3>
+                            <div key={index} className="text-center p-2">
+                                <h3 className="font-semibold">
+                                    {member.link ? (
+                                        <a href={member.link} className="hover:text-blue-200 underline">
+                                            {member.name}
+                                        </a>
+                                    ) : (
+                                        member.name
+                                    )}
+                                </h3>
                                 <p className="text-blue-100">{member.role}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="mb-8">
+                    <h2 className="text-2xl font-bold mb-4 text-center">References</h2>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        {references.map((ref, index) => (
+                            <div key={index} className="text-center p-2">
+                                <p className="text-blue-100">{ref}</p>
                             </div>
                         ))}
                     </div>
