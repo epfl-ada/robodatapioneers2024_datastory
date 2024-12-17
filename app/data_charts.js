@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
 import Papa from "papaparse";
 
-const TimeChartComponent = () => {
+const RacingChartComponent = () => {
 	const chartRef = useRef(null);
 	const chartInstance = useRef(null);
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -189,6 +189,10 @@ const TimeChartComponent = () => {
 
 	return (
 		<div className="w-full max-w-4xl mx-auto p-4">
+			<div className="bg-white rounded-lg shadow-lg p-4 h-[600px] mb-8">
+				<canvas ref={chartRef}></canvas>
+			</div>
+	
 			<div className="mb-4 flex justify-center gap-4">
 				<button
 					onClick={() => setIsPlaying(!isPlaying)}
@@ -202,10 +206,6 @@ const TimeChartComponent = () => {
 				>
 					↺ Reset
 				</button>
-			</div>
-
-			<div className="bg-white rounded-lg shadow-lg p-4 h-[600px]">
-				<canvas ref={chartRef}></canvas>
 			</div>
 		</div>
 	);
@@ -290,6 +290,107 @@ function ChartComponent() {
 	);
 }
 
+function BubbleChartComponent() {
+	const chartRef = useRef(null);
+
+	useEffect(() => {
+		const ctx = chartRef.current.getContext("2d");
+
+		new Chart(ctx, {
+			type: "bubble",
+			data: {
+				labels: "Africa",
+				datasets: [
+					{
+						label: ["China"],
+						backgroundColor: "rgba(255,221,50,0.2)",
+						borderColor: "rgba(255,221,50,1)",
+						data: [
+							{
+								x: 21269017,
+								y: 5.245,
+								r: 9,
+							},
+						],
+					},
+					{
+						label: ["Denmark"],
+						backgroundColor: "rgba(60,186,159,0.2)",
+						borderColor: "rgba(60,186,159,1)",
+						data: [
+							{
+								x: 258702,
+								y: 7.526,
+								r: 10,
+							},
+						],
+					},
+					{
+						label: ["Germany"],
+						backgroundColor: "rgba(0,0,0,0.2)",
+						borderColor: "#000",
+						data: [
+							{
+								x: 3979083,
+								y: 6.994,
+								r: 80,
+							},
+						],
+					},
+					{
+						label: ["Japan"],
+						backgroundColor: "rgba(193,46,12,0.2)",
+						borderColor: "rgba(193,46,12,1)",
+						data: [
+							{
+								x: 4931877,
+								y: 5.921,
+								r: 15,
+							},
+						],
+					},
+				],
+			},
+			options: {
+				title: {
+					display: true,
+					text: "Predicted world population (millions) in 2050",
+				},
+				scales: {
+					y: {
+						title: {
+							display: true,
+							text: "Happiness",
+						},
+					},
+					x: {
+						title: {
+							display: true,
+							text: "GDP (PPP)",
+						},
+					},
+				},
+			},
+		});
+
+		// Cleanup function to destroy the chart instance
+		return () => {
+			if (ctx) {
+				ctx.chart && ctx.chart.destroy();
+			}
+		};
+	}, []);
+
+	return (
+		<canvas
+			id="bubble-chart"
+			ref={chartRef}
+			width={800}
+			height={800}
+		></canvas>
+	);
+};
+
 function LoadingSpinner() {
 	return (
 		<div className="flex justify-center items-center">
@@ -298,4 +399,4 @@ function LoadingSpinner() {
 	);
 }
 
-export { TimeChartComponent, ChartComponent, LoadingSpinner };
+export { RacingChartComponent, ChartComponent, LoadingSpinner, BubbleChartComponent };

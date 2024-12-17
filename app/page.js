@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 import Papa from "papaparse";
-import { LoadingSpinner, ChartComponent, TimeChartComponent } from "./data_charts.js";
+import { LoadingSpinner, ChartComponent, RacingChartComponent, BubbleChartComponent } from "./data_charts.js";
 import { NavBar } from "./nav.js";
 
 function LandingPage() {
@@ -119,7 +119,10 @@ export default function Home() {
             <ChartComponent 
                 loading={<LoadingSpinner />}
             />
-            <TimeChartComponent
+            <RacingChartComponent
+                loading={<LoadingSpinner />}
+            />
+            <BubbleChartComponent
                 loading={<LoadingSpinner />}
             />
         </main>
