@@ -1,119 +1,215 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Chart from "chart.js/auto";
 import Papa from "papaparse";
 
-function TimeChartComponent() {
-	const [currentYear, setCurrentYear] = useState(2000);
+const TimeChartComponent = () => {
+	const chartRef = useRef(null);
+	const chartInstance = useRef(null);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [data, setData] = useState(null);
+	const [currentDate, setCurrentDate] = useState(null);
+	const [allDates, setAllDates] = useState([]);
+	const colorMap = useRef({});
+
+	const colors = [
+		"#3e95cd",
+		"#8e5ea2",
+		"#3cba9f",
+		"#e8c3b9",
+		"#c45850",
+		"#ff9f40",
+		"#4bc0c0",
+		"#36a2eb",
+		"#ff6384",
+		"#9966ff",
+	];
 
 	useEffect(() => {
 		const loadData = async () => {
-			const response = await fetch("./data.csv");
+			const response = await fetch("./time_data.csv");
 			const reader = response.body.getReader();
 			const result = await reader.read();
 			const decoder = new TextDecoder("utf-8");
 			const csv = decoder.decode(result.value);
-			
+
 			Papa.parse(csv, {
-				complete: (results) => setData(results.data.slice(1))
+				header: true,
+				complete: (results) => {
+					const dateColumns = Object.keys(results.data[0]).filter(
+						(key) => key !== "country"
+					);
+					setAllDates(dateColumns);
+					setCurrentDate(dateColumns[0]);
+					setData(results.data);
+
+					results.data.forEach((item, index) => {
+						colorMap.current[item.country] =
+							colors[index % colors.length];
+					});
+				},
 			});
 		};
+
 		loadData();
+
+		return () => {
+			if (animationFrameId.current) {
+				cancelAnimationFrame(animationFrameId.current);
+			}
+		};
 	}, []);
 
 	useEffect(() => {
-		let intervalId;
-		if (isPlaying && data) {
-			intervalId = setInterval(() => {
-				setCurrentYear(year => {
-					if (year >= 2023) {
-						setIsPlaying(false);
-						return 2000;
-					}
-					return year + 1;
-				});
-			}, 1000);
+		if (!data || !currentDate) return;
+
+		const sortedData = [...data].sort(
+			(a, b) => b[currentDate] - a[currentDate]
+		);
+
+		if (!chartInstance.current) {
+			const ctx = chartRef.current.getContext("2d");
+
+			chartInstance.current = new Chart(ctx, {
+				type: "bar",
+				data: {
+					labels: sortedData.map((item) => item.country),
+					datasets: [
+						{
+							data: sortedData.map((item) => item[currentDate]),
+							backgroundColor: sortedData.map(
+								(item) => colorMap.current[item.country]
+							),
+							borderWidth: 2,
+							borderRadius: 4,
+							borderColor: sortedData.map(
+								(item) => colorMap.current[item.country]
+							),
+						},
+					],
+				},
+				options: {
+					indexAxis: "y",
+					animation: {
+						duration: 1000,
+						easing: "easeInOutQuart",
+					},
+					transitions: {
+						active: {
+							animation: {
+								duration: 1000,
+							},
+						},
+					},
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: { display: false },
+						title: {
+							display: true,
+							text: currentDate,
+							font: { size: 24, weight: "bold" },
+							padding: 20,
+							color: "#333",
+						},
+						tooltip: {
+							callbacks: {
+								label: (context) => {
+									return `${context.formattedValue} units`;
+								},
+							},
+						},
+					},
+					scales: {
+						x: {
+							beginAtZero: true,
+							grid: { display: false },
+							ticks: {
+								font: {
+									size: 14,
+								},
+								color: "#666",
+							},
+						},
+						y: {
+							grid: { display: false },
+							ticks: {
+								font: {
+									size: 14,
+									weight: "bold",
+								},
+								color: "#333",
+							},
+						},
+					},
+					layout: {
+						padding: {
+							right: 20,
+						},
+					},
+				},
+			});
+		} else {
+			chartInstance.current.data.labels = sortedData.map(
+				(item) => item.country
+			);
+			chartInstance.current.data.datasets[0].data = sortedData.map(
+				(item) => item[currentDate]
+			);
+			chartInstance.current.data.datasets[0].backgroundColor =
+				sortedData.map((item) => colorMap.current[item.country]);
+			chartInstance.current.data.datasets[0].borderColor = sortedData.map(
+				(item) => colorMap.current[item.country]
+			);
+			chartInstance.current.options.plugins.title.text = currentDate;
+			chartInstance.current.update("default");
 		}
-		return () => clearInterval(intervalId);
-	}, [isPlaying, data]);
+	}, [currentDate, data]);
 
 	useEffect(() => {
-		if (!data) return;
-		
-		const yearData = data.find(row => row[0] === currentYear.toString());
-		if (!yearData) return;
-
-		// Create sorted data with labels
-		const sortedData = yearData.slice(1)
-			.map((value, index) => ({
-				value: parseFloat(value),
-				label: `Column ${index + 1}`,
-				color: [
-					'rgba(75, 192, 192, 0.6)',
-					'rgba(255, 99, 132, 0.6)',
-					'rgba(54, 162, 235, 0.6)',
-					'rgba(255, 206, 86, 0.6)'
-				][index]
-			}))
-			.sort((a, b) => b.value - a.value);
-
-		const ctx = document.getElementById("timeChartCanvas");
-		const chart = new Chart(ctx, {
-			type: 'bar',
-			data: {
-				labels: sortedData.map(d => d.label),
-				datasets: [{
-					data: sortedData.map(d => d.value),
-					backgroundColor: sortedData.map(d => d.color)
-				}]
-			},
-			options: {
-				animation: {
-					duration: 800,
-					easing: 'easeInOutQuart'
-				},
-				scales: {
-					y: {
-						beginAtZero: true
+		let interval;
+		if (isPlaying) {
+			interval = setInterval(() => {
+				setCurrentDate((prevDate) => {
+					const currentIndex = allDates.indexOf(prevDate);
+					if (currentIndex === allDates.length - 1) {
+						setIsPlaying(false);
+						return prevDate;
 					}
-				},
-				plugins: {
-					legend: {
-						display: false
-					}
-				}
-			}
-		});
+					return allDates[currentIndex + 1];
+				});
+			}, 2000);
+		}
+		return () => clearInterval(interval);
+	}, [isPlaying, allDates]);
 
-		return () => chart.destroy();
-	}, [currentYear, data]);
-
-	if (!data) return <LoadingSpinner />;
+	const handleReset = () => {
+		setIsPlaying(false);
+		setCurrentDate(allDates[0]);
+	};
 
 	return (
-		<div className="w-full max-w-2xl">
-			<div className="flex gap-4 mb-4">
-				<button 
+		<div className="w-full max-w-4xl mx-auto p-4">
+			<div className="mb-4 flex justify-center gap-4">
+				<button
 					onClick={() => setIsPlaying(!isPlaying)}
-					className="px-4 py-2 bg-blue-500 text-white rounded"
+					className="px-6 py-3 bg-blue-500 text-white rounded-lg text-lg font-semibold hover:bg-blue-600 transition-colors"
 				>
-					{isPlaying ? 'Pause' : 'Play'}
+					{isPlaying ? "⏸ Pause" : "▶ Play"}
 				</button>
-				<input 
-					type="range" 
-					min="2000" 
-					max="2023" 
-					value={currentYear}
-					onChange={(e) => setCurrentYear(parseInt(e.target.value))}
-					className="w-full"
-				/>
-				<span>{currentYear}</span>
+				<button
+					onClick={handleReset}
+					className="px-6 py-3 bg-gray-500 text-white rounded-lg text-lg font-semibold hover:bg-gray-600 transition-colors"
+				>
+					↺ Reset
+				</button>
 			</div>
-			<canvas id="timeChartCanvas"></canvas>
+
+			<div className="bg-white rounded-lg shadow-lg p-4 h-[600px]">
+				<canvas ref={chartRef}></canvas>
+			</div>
 		</div>
 	);
-}
+};
 
 function ChartComponent() {
 	useEffect(() => {

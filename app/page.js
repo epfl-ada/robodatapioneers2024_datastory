@@ -18,16 +18,17 @@ function LandingPage() {
 
         const particles = [];
         const numParticles = 60;
+        const icons = ['⚽', '🏀', '🎾', '⚾', '🏈']; // Sports icons
 
-        // Created with Claude 3.5 sonnet
-        // Initialize particles
+        // Initialize particles with sports icons
         for (let i = 0; i < numParticles; i++) {
             particles.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 speed: 0.5 + Math.random(),
                 angle: Math.random() * Math.PI * 2,
-                size: 2 + Math.random() * 2
+                size: 12, // Increased size for icons
+                icon: icons[Math.floor(Math.random() * icons.length)]
             });
         }
 
@@ -35,16 +36,15 @@ function LandingPage() {
             ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            ctx.fillStyle = '#0066cc';
+            ctx.font = '12px Arial';
             particles.forEach(particle => {
                 // Update position
                 particle.x += Math.cos(particle.angle) * particle.speed;
                 particle.y += Math.sin(particle.angle) * particle.speed;
                 
-                // Draw particle
-                ctx.beginPath();
-                ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                ctx.fill();
+                // Draw sports icon
+                ctx.fillStyle = '#0066cc';
+                ctx.fillText(particle.icon, particle.x, particle.y);
                 
                 // Connect nearby particles
                 particles.forEach(other => {
