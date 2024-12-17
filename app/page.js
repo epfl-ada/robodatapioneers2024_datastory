@@ -18,7 +18,7 @@ function LandingPage() {
 
         const particles = [];
         const numParticles = 60;
-        const icons = ['⚽', '🏀', '🎾', '⚾', '🏈']; // Sports icons
+        const icons = ["⚽", "🏀", "🎾", "⚾", "🏈", "🏓"]; // Sports icons
 
         // Initialize particles with sports icons
         for (let i = 0; i < numParticles; i++) {
@@ -84,7 +84,7 @@ function LandingPage() {
                 id="animated-bg"
                 className="absolute inset-0 w-full h-full"
             ></canvas>
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center px-20">
                 <h1 className="text-5xl font-bold text-black text-center">
                     Game-changer: How do the major sports events influence
                     YouTube engagement?
@@ -94,38 +94,132 @@ function LandingPage() {
     );
 }
 
+function Footer() {
+    const teamMembers = [
+        { name: "Team Member 1", role: "Data Analyst" },
+        { name: "Team Member 2", role: "Developer" },
+        { name: "Team Member 3", role: "Researcher" },
+        { name: "Team Member 4", role: "Data Scientist" }
+    ];
+
+    return (
+        <footer className="bg-blue-500 text-white py-12 mt-8">
+            <div className="container mx-auto px-4">
+                <div className="mb-8">
+                    <h2 className="text-2xl font-bold mb-4 text-center">Our Team</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {teamMembers.map((member, index) => (
+                            <div key={index} className="text-center">
+                                <h3 className="font-semibold">{member.name}</h3>
+                                <p className="text-blue-100">{member.role}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="text-center border-t border-blue-400 pt-4">
+                    <p>© 2024 Sports Analytics Project. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    );
+}
+
 export default function Home() {
     return (
-        <>
-        <NavBar />
-        <LandingPage />
-        <main className="min-h-screen flex flex-col items-center">
-            <div className="flex flex-col space-y-2 p-4 max-w-4xl">
-                <h1 className="text-3xl font-bold mb-2">Create Next App</h1>
-                <p className="text-lg">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem?
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate. Tempore esse adipisci quia repellat amet eaque numquam deleniti asperiores dolore? Voluptates, possimus?
-                    Suscipit fuga laudantium beatae vel esse non, consectetur dolores praesentium eos tempora? Perferendis eius accusantium tenetur sit error natus, corporis voluptas, beatae sed ipsa repudiandae qui nobis autem voluptatum quod?
-                    Soluta sequi deleniti et a, expedita nesciunt quos ad, facere laudantium nisi numquam perferendis? Veritatis eum harum saepe quae itaque maxime quia, assumenda vero commodi iste dolores corporis dolorum sequi.
-                    Placeat numquam nostrum sit, ipsam id delectus voluptatum inventore quas nemo ex. Dolor, ea dolore voluptate soluta nobis rerum nostrum nesciunt iusto magnam maxime id aperiam ipsum velit cum? Eaque!
-                    Alias, magnam sunt vitae facilis consectetur aut, et, quae odio eveniet accusantium deleniti exercitationem laudantium iste tempore? Sapiente incidunt impedit vel debitis ab in tenetur beatae dolorem, nulla laborum ipsum.
-                    Nihil quisquam odio quia veniam nemo voluptatibus animi! Sit labore eius voluptatem hic fugit eum itaque tempora, veniam ipsam at saepe numquam quis error perferendis eos, repellat ex harum excepturi.
-                    Quae natus maxime ex eligendi odit molestias explicabo voluptatibus atque! Quis officiis quam, exercitationem blanditiis, dicta alias voluptates accusamus voluptatibus, fugit iste dolorem! Numquam excepturi quia maxime illo ea minus?
-                    Tempora eveniet similique non perferendis repudiandae neque commodi aspernatur est totam nobis dolor, delectus incidunt repellendus tenetur facilis et quam, dicta corrupti quas iusto vitae quisquam illum saepe! Molestiae, reiciendis.
-                    Possimus quas voluptates, tempora iusto ab perspiciatis atque amet explicabo enim laborum! Alias accusamus, veniam voluptatum sed inventore cupiditate? Reiciendis temporibus veniam autem, quo illum possimus magni blanditiis et fugiat.
-                    Quae, voluptates fugit? Excepturi, quos. Accusamus numquam excepturi magnam libero porro eaque quas commodi, dolore facere ipsum aliquid saepe quibusdam. Ipsa deleniti, aperiam assumenda veniam iste cum sapiente voluptatem veritatis.
-                </p>
-            </div>
-            <ChartComponent 
-                loading={<LoadingSpinner />}
-            />
-            <RacingChartComponent
-                loading={<LoadingSpinner />}
-            />
-            <BubbleChartComponent
-                loading={<LoadingSpinner />}
-            />
-        </main>
-        </>
-    );
+		<>
+			<NavBar />
+			<LandingPage />
+			<main className="min-h-screen flex flex-col items-center">
+				<div className="flex flex-col space-y-2 p-4 max-w-4xl">
+					<h1 className="text-3xl font-bold mb-2">Create Next App</h1>
+					<p className="text-lg">
+						Lorem ipsum dolor sit, amet consectetur adipisicing
+						elit. Ipsam autem quibusdam, delectus in corrupti, ab
+						impedit magni iure eveniet aliquid soluta neque quisquam
+						ducimus dolores ex suscipit pariatur. Voluptatibus,
+						exercitationem? Lorem ipsum, dolor sit amet consectetur
+						adipisicing elit. Perspiciatis repellat iure tenetur
+						similique nemo soluta velit voluptate. Tempore esse
+						adipisci quia repellat amet eaque numquam deleniti
+						asperiores dolore? Voluptates, possimus? Suscipit fuga
+						laudantium beatae vel esse non, consectetur dolores
+						praesentium eos tempora? Perferendis eius accusantium
+						tenetur sit error natus, corporis voluptas, beatae sed
+						ipsa repudiandae qui nobis autem voluptatum quod? Soluta
+						sequi deleniti et a, expedita nesciunt quos ad, facere
+						laudantium nisi numquam perferendis? Veritatis eum harum
+						saepe quae itaque maxime quia, assumenda vero commodi
+						iste dolores corporis dolorum sequi. Placeat numquam
+						nostrum sit, ipsam id delectus voluptatum inventore quas
+						nemo ex. Dolor, ea dolore voluptate soluta nobis rerum
+						nostrum nesciunt iusto magnam maxime id aperiam ipsum
+						velit cum? Eaque! Alias, magnam sunt vitae facilis
+						consectetur aut, et, quae odio eveniet accusantium
+						deleniti exercitationem laudantium iste tempore?
+						Sapiente incidunt impedit vel debitis ab in tenetur
+						beatae dolorem, nulla laborum ipsum. Nihil quisquam odio
+						quia veniam nemo voluptatibus animi! Sit labore eius
+						voluptatem hic fugit eum itaque tempora, veniam ipsam at
+						saepe numquam quis error perferendis eos, repellat ex
+						harum excepturi. Quae natus maxime ex eligendi odit
+						molestias explicabo voluptatibus atque! Quis officiis
+						quam, exercitationem blanditiis, dicta alias voluptates
+						accusamus voluptatibus, fugit iste dolorem! Numquam
+						excepturi quia maxime illo ea minus? Tempora eveniet
+						similique non perferendis repudiandae neque commodi
+						aspernatur est totam nobis dolor, delectus incidunt
+						repellendus tenetur facilis et quam, dicta corrupti quas
+						iusto vitae quisquam illum saepe! Molestiae, reiciendis.
+						Possimus quas voluptates, tempora iusto ab perspiciatis
+						atque amet explicabo enim laborum! Alias accusamus,
+						veniam voluptatum sed inventore cupiditate? Reiciendis
+						temporibus veniam autem, quo illum possimus magni
+						blanditiis et fugiat. Quae, voluptates fugit? Excepturi,
+						quos. Accusamus numquam excepturi magnam libero porro
+						eaque quas commodi, dolore facere ipsum aliquid saepe
+						quibusdam. Ipsa deleniti, aperiam assumenda veniam iste
+						cum sapiente voluptatem veritatis.
+					</p>
+				</div>
+				<ChartComponent loading={<LoadingSpinner />} />
+				<div className="flex flex-col space-y-2 p-4 max-w-4xl">
+					<h2 className="text-2xl font-bold mb-2">Create Next App</h2>
+					<p className="text-lg">
+						Lorem ipsum dolor sit, amet consectetur adipisicing
+						elit. Ipsam autem quibusdam, delectus in corrupti, ab
+						impedit magni iure eveniet aliquid soluta neque quisquam
+						ducimus dolores ex suscipit pariatur. Voluptatibus,
+						exercitationem? Lorem ipsum, dolor sit amet consectetur
+						adipisicing elit. Perspiciatis repellat iure tenetur
+						similique nemo soluta velit voluptate. Tempore esse
+						adipisci quia repellat amet eaque numquam deleniti
+						asperiores dolore? Voluptates, possimus? Suscipit fuga
+						laudantium beatae vel esse non, consectetur dolores
+						praesentium eos tempora? Perferendis eius accusantium
+						tenetur sit error natus, corporis voluptas, beatae sed
+						ipsa repudiandae qui nobis autem voluptatum quod? Soluta
+						sequi deleniti et a, expedita nesciunt quos ad, facere
+						laudantium nisi numquam perferendis? Veritatis eum harum
+						saepe quae itaque maxime quia, assumenda vero commodi
+						iste dolores corporis dolorum sequi.
+					</p>
+				</div>
+				<RacingChartComponent loading={<LoadingSpinner />} />
+				<div className="flex flex-col space-y-2 p-4 max-w-4xl">
+					<h2 className="text-2xl font-bold mb-2">Create Next App</h2>
+					<p className="text-lg">
+						Lorem ipsum dolor sit, amet consectetur adipisicing
+						elit. Ipsam autem quibusdam, delectus in corrupti, ab
+						impedit magni iure eveniet aliquid soluta neque quisquam
+						ducimus dolores ex suscipit pariatur. Voluptatibus,
+						exercitationem? Lorem ipsum, dolor sit amet consectetur
+						adipisicing elit. Perspiciatis repellat iure tenetur
+						similique nemo soluta velit voluptate.
+					</p>
+				</div>
+				<BubbleChartComponent loading={<LoadingSpinner />} />
+			</main>
+            <Footer />
+		</>
+	);
 }

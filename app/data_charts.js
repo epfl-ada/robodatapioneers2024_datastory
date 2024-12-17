@@ -382,12 +382,14 @@ function BubbleChartComponent() {
 	}, []);
 
 	return (
-		<canvas
-			id="bubble-chart"
-			ref={chartRef}
-			width={800}
-			height={800}
-		></canvas>
+		<div className="w-full max-w-2xl">
+			<canvas
+				id="bubble-chart"
+				ref={chartRef}
+				width={800}
+				height={800}
+			></canvas>
+		</div>
 	);
 };
 
