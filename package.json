@@ -6,14 +6,17 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dev_local": "next dev -H localhost"
   },
   "dependencies": {
     "chart.js": "^4.4.7",
     "next": "15.1.0",
     "papaparse": "^5.4.1",
+    "plotly.js": "^2.35.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-plotly.js": "^2.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
