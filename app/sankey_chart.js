@@ -31,15 +31,15 @@ const SankeyChart = ({ dataPath }) => {
     }
 
     return (
-		<div className="sankey-chart">
-			<Plot
-				data={data.data}
-				layout={data.layout}
-				config={data.config || {}} // Optional configuration
+        <div className="w-full max-w-2xl mx-auto flex justify-center">
+            <Plot
+                data={data.data}
+                layout={data.layout}
+                config={data.config || {}} // Optional configuration
                 frames={data.frames || []} // Optional animation frames
-			/>
-		</div>
-	);
+            />
+        </div>
+    );
 };
 
 export { SankeyChart };
