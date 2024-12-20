@@ -9,6 +9,7 @@ import {
 	BubbleChartComponent,
 } from "./data_charts.js";
 import { BoxPlotChart } from "./box_plot_chart.js";
+import { LinePlotChart } from "./line_chart.js";
 import { NavBar } from "./nav.js";
 
 function LandingPage() {
@@ -292,6 +293,30 @@ export default function Home() {
 						/>
 					)}
 				</VariableChooserComponent>
+                <VariableChooserComponent
+                    title="Line plot of delta view"
+                    variables={[
+                        {
+                            datapath: "data/first_plot/sum_delta_subs_overtime.csv",
+                            name: "Delta Subs",
+                        },
+                        {
+                            datapath: "data/first_plot/sum_delta_videos_overtime.csv",
+                            name: "Delta Videos",
+                        },
+                        {
+                            datapath: "data/first_plot/sum_delta_views_overtime.csv",
+                            name: "Delta Views",
+                        }
+                    ]}
+                >
+                    {(variable) => (
+                        <LinePlotChart
+                            datapath={variable}
+                            loading={<LoadingSpinner />}
+                        />
+                    )}
+                </VariableChooserComponent>
 			</main>
 			<Footer />
 		</>

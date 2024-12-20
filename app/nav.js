@@ -46,7 +46,7 @@ const NavBar = () => {
                             scrolled ? "text-lg" : "text-xl"
                         }`}
                     >
-                        Logo
+                        Robodatapioneers2024
                     </h1>
                     <div className="hidden md:flex space-x-6">
                         <a
