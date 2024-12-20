@@ -3,7 +3,7 @@ import Chart from "chart.js/auto";
 import Papa from "papaparse";
 
 
-const RacingChartComponent = ({dataPath}) => {
+const RacingChartComponent = ({dataPath, xName, yName}) => {
 	const chartRef = useRef(null);
 	const chartInstance = useRef(null);
 	const [isPlaying, setIsPlaying] = useState(false);
@@ -131,6 +131,12 @@ const RacingChartComponent = ({dataPath}) => {
 								font: { size: 14 },
 								color: "#666",
 							},
+                            title: {
+                                display: true,
+                                text: xName,
+                                font: { size: 16, weight: 'bold' },
+                                color: '#333',
+                            },
 						},
 						y: {
 							grid: { display: false },
@@ -141,6 +147,12 @@ const RacingChartComponent = ({dataPath}) => {
 								},
 								color: "#333",
 							},
+                            title: {
+                                display: true,
+                                text: yName,
+                                font: { size: 16, weight: 'bold' },
+                                color: '#333',
+                            },
 						},
 					},
 					layout: {

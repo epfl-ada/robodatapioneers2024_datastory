@@ -101,6 +101,8 @@ export default function Home() {
 				/>
 				<RacingChartComponent
 					dataPath={"data/third_plot/sport_transit.csv"}
+                    xName={"Number of videos"}
+                    yName={"Sport category"}
 					loading={<LoadingSpinner />}
 				/>
 				<SubTitleText
