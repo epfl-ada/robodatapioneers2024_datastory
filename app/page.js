@@ -167,7 +167,34 @@ export default function Home() {
 
                     As sports content on YouTube continues to grow, it becomes a vital indicator of global sports trends and fan interests. Below, our first plot showcases the delta views of various sports channels over the years, illustrating the evolving patterns of viewer engagement."
 				></SubTitleText>
-				<ChartComponent loading={<LoadingSpinner />} />
+				<VariableChooserComponent
+					title=""
+					variables={[
+						{
+							datapath:
+								"data/first_plot/sum_delta_subs_overtime.csv",
+							name: "Delta Subs",
+						},
+						{
+							datapath:
+								"data/first_plot/sum_delta_videos_overtime.csv",
+							name: "Delta Videos",
+						},
+						{
+							datapath:
+								"data/first_plot/sum_delta_views_overtime.csv",
+							name: "Delta Views",
+						},
+					]}
+				>
+					{(variable) => (
+						<LinePlotChart
+							datapath={variable}
+							colors={["#187F42"]}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
 				<Paragraph text="Next, let’s delve into the distribution of different sports within the YouTube community. "></Paragraph>
 				<VariableChooserComponent
 					title="Line plot of delta view"
@@ -204,6 +231,17 @@ export default function Home() {
 						engagement on YouTube.
 					</p>
 				</div>
+				<div>
+					<VariableChooserComponentImage
+						Title="Wordcloud for all tags in sports videos"
+						variables={[
+							{
+								datapath: "sports_wordcloud.png",
+								name: "Word Cloud Image",
+							},
+						]}
+					/>
+				</div>
 				<p>woeifjoqiwejf</p>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
 					<p className="text-lg text-left">
@@ -228,8 +266,8 @@ export default function Home() {
 						ever-evolving intersection of sports and digital
 						engagement.
 					</p>
+					<hr className="my-8 border-t-2 border-gray-300" />
 				</div>
-				fqowijfqoiwjfoiqjwe
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
 					<h3 className="text-2xl font-bold mb-2">
 						Launching into Our Core Analysis
@@ -261,9 +299,93 @@ export default function Home() {
 						</li>
 					</ul>
 				</div>
-				qoiwejfoqipwjefioqwjeopifj
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
-					<h2 className="text-2xl font-bold mb-2"></h2>
+					<h1 className="text-3xl font-bold mb-2">
+						Part 1: General trend
+					</h1>
+					<p>
+						Let’s kick off our analysis by exploring how sports
+						content has evolved on YouTube over the years. As our
+						first plot shows, the number of sports-related videos
+						uploaded per year has generally increased, reflecting a
+						growing digital enthusiasm for sports.
+					</p>
+				</div>
+				<VariableChooserComponent
+					Title="Number of sport videos per year"
+					variables={[
+						{
+							datapath:
+								"data/part_1_plot/sports_videos_per_year.csv",
+							name: "Sports videos per year",
+						},
+					]}
+				>
+					{(variable) => (
+						<LinePlotChart
+							datapath={variable}
+							colors={["#187F42"]}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
+				<RacingChartComponent
+					dataPath={"data/third_plot/sport_transit.csv"}
+					xName={"Number of videos"}
+					yName={"Sport category"}
+					loading={<LoadingSpinner />}
+				/>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<h3 className="text-1xl font-bold mb-2">
+						Shifting Sentiments in Sports Video Titles
+					</h3>
+					<p>
+						The way sports-related content is framed on YouTube has
+						also evolved over time. To better understand this, we
+						analyzed the sentiment of video titles, categorizing
+						them as positive, negative, or neutral. Interestingly,
+						our next plot reveals that the percentage of neutral
+						video titles has been steadily increasing over the
+						years, suggesting a shift toward more descriptive or
+						fact-based content rather than emotionally charged
+						titles.
+					</p>
+				</div>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<Image
+						src="data/part_1_plot/sentiment_percentage.png"
+						alt="Sentiment percentage"
+						layout="responsive"
+						width={80}
+						height={80}
+					/>
+				</div>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<Image
+						src="data/part_1_plot/trend_sentiment.png"
+						alt="Sentiment percentage"
+						layout="responsive"
+						width={80}
+						height={80}
+					/>
+				</div>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<p>
+						To confirm this trend, we performed the Mann-Kendall
+						Test, a statistical method for detecting monotonic
+						trends over time. The test indicated a significant
+						increasing trend in the percentage of neutral video
+						titles, with a p-value of 0.001, confirming that this
+						shift is unlikely due to random chance. This change
+						might reflect evolving content strategies where creators
+						focus on informational titles to reach broader
+						audiences.
+					</p>
+				</div>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
+					<h1 className="text-3xl font-bold mb-2">
+						Part 2: Event-Based Analysis
+					</h1>
 					<p className="text-lg text-left">
 						In this part of the analysis, we focus on some of the
 						major sports events and their impact on YouTube
@@ -662,8 +784,9 @@ export default function Home() {
 							name: "Sankey basketball",
 						},
 						{
-							datapath: "data/sankey_plot/sankey_diagram_boxing_2015.json",
-                            name: "Sankey boxing"
+							datapath:
+								"data/sankey_plot/sankey_diagram_boxing_2015.json",
+							name: "Sankey boxing",
 						},
 					]}
 				>
@@ -731,34 +854,6 @@ export default function Home() {
 					{(variable) => (
 						<BoxPlotChart
 							datapath={variable}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponent>
-				<VariableChooserComponent
-					title="Line plot of delta view"
-					variables={[
-						{
-							datapath:
-								"data/first_plot/sum_delta_subs_overtime.csv",
-							name: "Delta Subs",
-						},
-						{
-							datapath:
-								"data/first_plot/sum_delta_videos_overtime.csv",
-							name: "Delta Videos",
-						},
-						{
-							datapath:
-								"data/first_plot/sum_delta_views_overtime.csv",
-							name: "Delta Views",
-						},
-					]}
-				>
-					{(variable) => (
-						<LinePlotChart
-							datapath={variable}
-							colors={["#187F42"]}
 							loading={<LoadingSpinner />}
 						/>
 					)}

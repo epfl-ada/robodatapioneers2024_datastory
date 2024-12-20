@@ -66,7 +66,7 @@ function LinePlotChart({ datapath, colors }) {
                     },
                 }))}
                 layout={{
-                    title: { text: "Line Plot" },
+                    title: { text: "" },
                     xaxis: { title: { text: columns[0] } },
                     yaxis: { title: { text: "Values" } },
                     transition: {
