@@ -13,6 +13,7 @@ import { LinePlotChart } from "./line_chart.js";
 import { BarPlotChart } from "./bar_chart.js";
 import { NavBar } from "./nav.js";
 import { Footer, LandingPage } from "./home_layout.js";
+import { IframeChart } from "./iframe_charts.js";
 
 function SubTitleText({ title, text }) {
 	return (
@@ -186,8 +187,14 @@ export default function Home() {
                         />
                     )}
                 </VariableChooserComponent>
-			</main>
-			<Footer />
-		</>
-	);
+                <div className="flex justify-center w-full align-center">
+                    <IframeChart
+                        title="Iframe Chart"
+                        src="lda_world_cup_football.html"
+                    />
+                </div>
+            </main>
+            <Footer />
+        </>
+    );
 }
