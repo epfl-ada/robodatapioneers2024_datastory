@@ -73,20 +73,24 @@ function LandingPage() {
 		};
 	}, []);
 
-	return (
-		<div className="relative w-full h-screen">
-			<canvas
-				id="animated-bg"
-				className="absolute inset-0 w-full h-full"
-			></canvas>
-			<div className="absolute inset-0 flex items-center justify-center px-20">
-				<h1 className="text-5xl font-bold text-black text-center">
-					Game-changer: How do the major sports events influence
-					YouTube engagement?
-				</h1>
-			</div>
-		</div>
-	);
+    return (
+        <div className="relative w-full h-screen">
+            <img
+                src="landing_page_image.webp"
+                alt="Background"
+                className="absolute inset-0 w-full h-full object-cover"
+            />
+            <canvas
+                id="animated-bg"
+                className="absolute inset-0 w-full h-full opacity-50"
+            ></canvas>
+            <div className="absolute inset-0 flex items-center justify-center px-20">
+                <h1 className="text-8xl text-black text-center font-monoton">
+                    Game-changer
+                </h1>
+            </div>
+        </div>
+    );
 }
 
 function Footer() {

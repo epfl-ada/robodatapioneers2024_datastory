@@ -22,6 +22,11 @@ export default {
 					100: "#f8b229", // Yellow
 				},
 			},
+			fontFamily: {
+				sans: ["var(--font-geist-sans)"],
+				mono: ["var(--font-geist-mono)"],
+        monoton: ["var(--font-monoton)"],
+			},
 		},
 	},
 	plugins: [],

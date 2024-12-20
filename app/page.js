@@ -15,6 +15,7 @@ import { HeatMapChart } from "./heatmap.js";
 import { NavBar } from "./nav.js";
 import { Footer, LandingPage } from "./home_layout.js";
 import { IframeChart } from "./iframe_charts.js";
+import { BubbleChart } from "./bubble_chart.js";
 
 function SubTitleText({ title, text }) {
 	return (

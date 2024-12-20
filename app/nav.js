@@ -33,7 +33,7 @@ const NavBar = () => {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-mono ${
                 scrolled
                     ? "h-12 bg-red2-100/90 backdrop-blur-sm shadow-md"
                     : "h-16 bg-red2-100"
