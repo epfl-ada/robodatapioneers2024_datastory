@@ -11,7 +11,7 @@ import { BoxPlotChart } from "./box_plot_chart.js";
 import { LinePlotChart } from "./line_chart.js";
 import { BarPlotChart } from "./bar_chart.js";
 import { RacingChartComponent } from "./racing_chart.js"
-import { HeatMapChar } from "./heatmap.js";
+import { HeatMapChart } from "./heatmap.js";
 import { NavBar } from "./nav.js";
 import { Footer, LandingPage } from "./home_layout.js";
 import { IframeChart } from "./iframe_charts.js";
@@ -102,8 +102,8 @@ export default function Home() {
 				/>
 				<RacingChartComponent
 					dataPath={"data/third_plot/sport_transit.csv"}
-                    xName={"Number of videos"}
-                    yName={"Sport category"}
+					xName={"Number of videos"}
+					yName={"Sport category"}
 					loading={<LoadingSpinner />}
 				/>
 				<SubTitleText
@@ -154,6 +154,7 @@ export default function Home() {
 					{(variable) => (
 						<LinePlotChart
 							datapath={variable}
+							colors={["#187F42"]}
 							loading={<LoadingSpinner />}
 						/>
 					)}
@@ -199,29 +200,32 @@ export default function Home() {
 					)}
 				</VariableChooserComponent>
 				<div className="flex justify-center w-full align-center flex-col">
-                    <h3 className="text-2xl font-bold mb-2 text-center p-4">Topic modeling LDA</h3>
+					<h3 className="text-2xl font-bold mb-2 text-center p-4">
+						Topic modeling LDA
+					</h3>
 					<IframeChart
 						title="Iframe Chart"
 						src="lda_world_cup_football.html"
 					/>
 				</div>
-                <VariableChooserComponent
-                    Title="Line plot of delta view"
-                    variables={[
-                        {
-                            datapath: "data/second_plot/fre_popular_sports_tags.csv",
-                            name: "Delta Subs",
-                        },
-                    ]}
-                >
-                    {(variable) => (
-                        <HeatMapChar
-                            datapath={variable}
-                            colors={["#165B33"]}
-                            loading={<LoadingSpinner />}
-                        />
-                    )}
-                </VariableChooserComponent>
+				<VariableChooserComponent
+					Title="Line plot of delta view"
+					variables={[
+						{
+							datapath:
+								"data/second_plot/fre_popular_sports_tags.csv",
+							name: "Delta Subs",
+						},
+					]}
+				>
+					{(variable) => (
+						<HeatMapChart
+							datapath={variable}
+							colors={["#165B33"]}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
 			</main>
 			<Footer />
 		</>

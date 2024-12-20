@@ -12,7 +12,7 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
 
-function HeatMapChar({ datapath }) {
+function HeatMapChart({ datapath }) {
 	const [data, setData] = useState([]);
 	const [columns, setColumns] = useState([]);
 	const [yData, setYData] = useState([]);
@@ -50,4 +50,4 @@ function HeatMapChar({ datapath }) {
 	);
 }
 
-export { HeatMapChar };
+export { HeatMapChart };

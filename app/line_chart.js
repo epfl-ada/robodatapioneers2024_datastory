@@ -12,7 +12,7 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
 
-function LinePlotChart({ datapath }) {
+function LinePlotChart({ datapath, colors }) {
     const [data, setData] = useState([]);
     const [columns, setColumns] = useState([]);
     const [xData, setXData] = useState([]);
@@ -44,7 +44,14 @@ function LinePlotChart({ datapath }) {
             .catch((error) => console.error("Error loading CSV data:", error));
     }, [datapath]);
 
+    if (colors === undefined) {
+        colors = ["#3e95cd"];
+    }
+
     console.log("hello", data, columns, xData);
+
+    // Function to get a random color from the colors array
+    const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
 
     return (
         <div className="w-full max-w-2xl">
@@ -54,7 +61,9 @@ function LinePlotChart({ datapath }) {
                     y: data.map((row) => row[index + 1]),
                     type: "line",
                     name: `Line ${index + 1}: ${col}`,
-                    // line: { color: ["#FF5733", "#33FF57", "#3357FF"][index % 3] }, // Specify your colors here
+                    line: {
+                        color: getRandomColor(),
+                    },
                 }))}
                 layout={{
                     title: { text: "Line Plot" },
