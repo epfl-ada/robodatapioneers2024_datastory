@@ -1,107 +1,130 @@
-import { useEffect, useRef, useState } from "react";
-import * as d3 from "d3";
+"use client";
 
-const BubbleChart = () => {
-	const svgRef = useRef(null);
-	const [year, setYear] = useState(2000);
+import dynamic from "next/dynamic";
+const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
+import Papa from "papaparse";
+import { useEffect, useState } from "react";
 
-	// Sample data
-	const data = [
-		{ name: "Company A", year: 2000, value: 10, x: 100, y: 150 },
-		{ name: "Company B", year: 2001, value: 20, x: 200, y: 200 },
-		{ name: "Company C", year: 2002, value: 15, x: 300, y: 100 },
-		// Add more data here
-	];
+function BubbleChart({ datapath, colors }) {
+    const [bubbleData, setBubbleData] = useState([]);
+    const [years, setYears] = useState([]);
+    const [columns, setColumns] = useState([]);
 
-	useEffect(() => {
-		// Set up the chart dimensions
-		const width = 800;
-		const height = 600;
+    useEffect(() => {
+        fetch(datapath)
+            .then((res) => res.text())
+            .then((csv) => {
+                Papa.parse(csv, {
+                    complete: (result) => {
+                        const header = result.data[0].map((c) => c.trim());
+                        const rows = result.data.slice(1).map((r) => r.map((c) => c.trim()));
+                        const uniqueYears = [...new Set(rows.map((r) => r[0]))];
+                        const traces = uniqueYears.map((year) => {
+                            const yearData = rows.filter((row) => row[0] === year);
+                            return {
+                                name: year,
+                                x: yearData.map((d) => parseFloat(d[1])),
+                                y: yearData.map((d) => parseFloat(d[2])),
+                                text: yearData.map((d) => d[3]),
+                                mode: "markers",
+                                marker: {
+                                    size: yearData.map((d) => parseFloat(d[4])),
+                                    color: colors,
+                                    sizemode: "area",
+                                },
+                            };
+                        });
+                        setColumns(header);
+                        setYears(uniqueYears);
+                        setBubbleData(traces);
+                    },
+                });
+            })
+            .catch((err) => console.error("CSV load error:", err));
+    }, [datapath, colors]);
 
-		// Set up the SVG container
-		const svg = d3
-			.select(svgRef.current)
-			.attr("width", width)
-			.attr("height", height);
+    // Each frame corresponds to one year
+    const frames = bubbleData.map((trace) => ({
+        name: trace.name,
+        data: [trace],
+    }));
 
-		// Set up the size scale for the bubbles
-		const sizeScale = d3
-			.scaleLinear()
-			.domain([0, d3.max(data, (d) => d.value)])
-			.range([5, 50]); // Bubble size range
+    // Create slider steps for each year
+    const sliderSteps = bubbleData.map((trace, i) => ({
+        label: trace.name,
+        method: "animate",
+        args: [
+            [trace.name],
+            {
+                mode: "immediate",
+                transition: { duration: 500 },
+                frame: { duration: 500, redraw: false },
+            },
+        ],
+    }));
 
-		// Set up the x and y scales for positioning the bubbles
-		const xScale = d3.scaleLinear().domain([0, 500]).range([0, width]);
-		const yScale = d3.scaleLinear().domain([0, 500]).range([0, height]);
+    const layout = {
+        title: "Animated Bubble Chart",
+        xaxis: { title: columns[1] },
+        yaxis: { title: columns[2] },
+        showlegend: false,
+        updatemenus: [
+            {
+                type: "buttons",
+                x: 0.1,
+                y: 1.15,
+                xanchor: "left",
+                yanchor: "top",
+                showactive: false,
+                buttons: [
+                    {
+                        label: "Play",
+                        method: "animate",
+                        args: [
+                            null,
+                            {
+                                fromcurrent: true,
+                                frame: { duration: 500, redraw: false },
+                                transition: { duration: 500 },
+                            },
+                        ],
+                    },
+                    {
+                        label: "Pause",
+                        method: "animate",
+                        args: [
+                            [null],
+                            {
+                                mode: "immediate",
+                                frame: { duration: 0, redraw: false },
+                            },
+                        ],
+                    },
+                ],
+            },
+        ],
+        sliders: [
+            {
+                active: 0,
+                steps: sliderSteps,
+                x: 0.1,
+                y: 0,
+                len: 0.9,
+            },
+        ],
+    };
 
-		// Function to update the bubbles based on the selected year
-		const updateBubbles = (year) => {
-			const filteredData = data.filter((d) => d.year <= year);
-
-			// Bind data to circles
-			const bubbles = svg
-				.selectAll(".bubble")
-				.data(filteredData, (d) => d.name);
-
-			// Remove exiting bubbles
-			bubbles.exit().remove();
-
-			// Create new bubbles (enter phase)
-			const newBubbles = bubbles
-				.enter()
-				.append("circle")
-				.attr("class", "bubble")
-				.attr("r", (d) => sizeScale(d.value))
-				.attr("cx", (d) => xScale(d.x))
-				.attr("cy", (d) => yScale(d.y))
-				.style("fill", "steelblue")
-				.style("opacity", 0.7);
-
-			// Add labels inside the bubbles
-			newBubbles
-				.append("text")
-				.attr("class", "label")
-				.attr("x", (d) => xScale(d.x))
-				.attr("y", (d) => yScale(d.y))
-				.attr("dy", 5)
-				.text((d) => d.name);
-
-			// Transition for updated bubbles
-			bubbles
-				.merge(newBubbles)
-				.transition()
-				.duration(500)
-				.attr("r", (d) => sizeScale(d.value))
-				.attr("cx", (d) => xScale(d.x))
-				.attr("cy", (d) => yScale(d.y))
-				.style("fill", "steelblue")
-				.style("opacity", 0.7);
-		};
-
-		// Initial call to render bubbles for the selected year
-		updateBubbles(year);
-
-		// Cleanup on unmount
-		return () => {
-			svg.selectAll("*").remove();
-		};
-	}, [year]); // Re-render when the year changes
-
-	return (
-		<div>
-			<input
-				type="range"
-				min="2000"
-				max="2020"
-				step="1"
-				value={year}
-				onChange={(e) => setYear(Number(e.target.value))}
-				className="slider"
-			/>
-			<span>Year: {year}</span>
-			<svg ref={svgRef}></svg>
-		</div>
-	);
-};
+    return (
+        <div className="w-full max-w-2xl">
+            <Plot
+                data={[bubbleData[0]]}
+                layout={layout}
+                frames={frames}
+                config={{ scrollZoom: false }}
+                style={{ width: "100%", height: "600px" }}
+            />
+        </div>
+    );
+}
 
 export { BubbleChart };
