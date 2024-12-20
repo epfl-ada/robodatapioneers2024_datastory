@@ -10,13 +10,14 @@ import {
 import { BoxPlotChart } from "./box_plot_chart.js";
 import { LinePlotChart } from "./line_chart.js";
 import { BarPlotChart } from "./bar_chart.js";
-import { RacingChartComponent } from "./racing_chart.js"
+import { RacingChartComponent } from "./racing_chart.js";
 import { HeatMapChart } from "./heatmap.js";
 import { NavBar } from "./nav.js";
 import { Footer, LandingPage } from "./home_layout.js";
 import { IframeChart } from "./iframe_charts.js";
 import { BubbleChart } from "./bubble_chart.js";
 import { SankeyChart } from "./sankey_chart.js";
+import { LineDottedPlotChart } from "./line_chart_dotted.js";
 
 function SubTitleText({ title, text }) {
 	return (
@@ -27,46 +28,54 @@ function SubTitleText({ title, text }) {
 	);
 }
 
-function VariableChooserComponent({ Title, variables, children }) {
-    const [selectedVariable, setSelectedVariable] = useState(
-        variables[0].datapath
-    );
-
-    const handleChange = (e) => {
-        setSelectedVariable(e.target.value);
-    };
-
+function Paragraph({ text }) {
     return (
-        <div className="flex flex-col space-y-2 p-4 max-w-4xl">
-            <h3 className="text-2xl font-bold mb-2">{Title}</h3>
-            {variables.length > 1 && (
-                <select
-                    value={selectedVariable}
-                    onChange={handleChange}
-                    className="p-2 border border-gray-300 rounded-md"
-                >
-                    {variables.map((variable, index) => (
-                        <option key={index} value={variable.datapath}>
-                            {variable.name}
-                        </option>
-                    ))}
-                </select>
-            )}
-            {children(selectedVariable)}
+        <div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
+            <p className="text-lg text-left">{text}</p>
         </div>
     );
 }
 
+function VariableChooserComponent({ Title, variables, children }) {
+	const [selectedVariable, setSelectedVariable] = useState(
+		variables[0].datapath
+	);
+
+	const handleChange = (e) => {
+		setSelectedVariable(e.target.value);
+	};
+
+	return (
+		<div className="flex flex-col space-y-2 p-4 max-w-4xl">
+			<h3 className="text-2xl font-bold mb-2">{Title}</h3>
+			{variables.length > 1 && (
+				<select
+					value={selectedVariable}
+					onChange={handleChange}
+					className="p-2 border border-gray-300 rounded-md"
+				>
+					{variables.map((variable, index) => (
+						<option key={index} value={variable.datapath}>
+							{variable.name}
+						</option>
+					))}
+				</select>
+			)}
+			{children(selectedVariable)}
+		</div>
+	);
+}
+
 function VariableChooserComponentLDA({ Title, variables, children }) {
-    const [selectedVariable, setSelectedVariable] = useState(
-        variables[0].datapath
-    );
+	const [selectedVariable, setSelectedVariable] = useState(
+		variables[0].datapath
+	);
 
-    const handleChange = (e) => {
-        setSelectedVariable(e.target.value);
-    };
+	const handleChange = (e) => {
+		setSelectedVariable(e.target.value);
+	};
 
-    return (
+	return (
 		<div className="flex justify-center w-full max-w-7xl align-center flex-col">
 			<h3 className="text-2xl font-bold mb-2 text-center">{Title}</h3>
 			{variables.length > 1 && (
@@ -82,14 +91,12 @@ function VariableChooserComponentLDA({ Title, variables, children }) {
 					))}
 				</select>
 			)}
-            <div className="flex justify-center w-full align-center flex-col">
-			{children(selectedVariable)}
-            </div>
+			<div className="flex justify-center w-full align-center flex-col">
+				{children(selectedVariable)}
+			</div>
 		</div>
 	);
 }
-
-
 
 export default function Home() {
 	return (
@@ -124,6 +131,30 @@ export default function Home() {
                     As sports content on YouTube continues to grow, it becomes a vital indicator of global sports trends and fan interests. Below, our first plot showcases the delta views of various sports channels over the years, illustrating the evolving patterns of viewer engagement."
 				></SubTitleText>
 				<ChartComponent loading={<LoadingSpinner />} />
+				<Paragraph text="Next, let’s delve into the distribution of different sports within the YouTube community. "></Paragraph>
+				<VariableChooserComponent
+					title="Line plot of delta view"
+					variables={[
+						{
+							datapath:
+								"data/second_plot/fre_popular_sports_tags.csv",
+							name: "Delta Subs",
+						},
+					]}
+				>
+					{(variable) => (
+						<BarPlotChart
+							datapath={variable}
+							colors={["#165B33"]}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
+				<Paragraph
+					text="Football, basketball, and wrestling reign supreme on YouTube, showcasing their immense global popularity and passionate fan bases. These sports attract millions of views and countless dedicated channels, creating vibrant communities where fans engage, share highlights, and celebrate their favorite moments!
+
+                    Now, let’s dive into the most frequently featured elements in sports content and discover what truly captivates fans around the world! Our Wordcloud visualizes the top keywords and trends that drive engagement on YouTube."
+				></Paragraph>
 				<SubTitleText
 					title="Create Next App"
 					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
@@ -188,24 +219,6 @@ export default function Home() {
 					)}
 				</VariableChooserComponent>
 				<VariableChooserComponent
-					title="Line plot of delta view"
-					variables={[
-						{
-							datapath:
-								"data/second_plot/fre_popular_sports_tags.csv",
-							name: "Delta Subs",
-						},
-					]}
-				>
-					{(variable) => (
-						<BarPlotChart
-							datapath={variable}
-							colors={["#165B33"]}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponent>
-				<VariableChooserComponent
 					Title="Line plot of delta view"
 					variables={[
 						{
@@ -227,32 +240,30 @@ export default function Home() {
 						/>
 					)}
 				</VariableChooserComponent>
-                <VariableChooserComponentLDA
-                    Title="Topic modeling LDA"
-                    variables={[
-                        {
-                            datapath: "lda_world_cup_football.html",
-                            name: "LDA World Cup Football",
-                        },
-                        {
-                            datapath: "lda_olympics.html",
-                            name: "LDA Olympics",
-                        },
-                        {
-                            datapath: "lda_nba.html",
-                            name: "LDA NBA",
-                        },
-                    ]}
-                    >
-
-                        {(variable) => (
-                            <IframeChart
-                                src={variable}
-                                loading={<LoadingSpinner />}
-                            />
-                        )}
-
-                </VariableChooserComponentLDA>
+				<VariableChooserComponentLDA
+					Title="Topic modeling LDA"
+					variables={[
+						{
+							datapath: "lda_world_cup_football.html",
+							name: "LDA World Cup Football",
+						},
+						{
+							datapath: "lda_olympics.html",
+							name: "LDA Olympics",
+						},
+						{
+							datapath: "lda_nba.html",
+							name: "LDA NBA",
+						},
+					]}
+				>
+					{(variable) => (
+						<IframeChart
+							src={variable}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponentLDA>
 				<VariableChooserComponent
 					Title="Line plot of delta view"
 					variables={[
@@ -275,8 +286,7 @@ export default function Home() {
 					Title="User comment flow chart for soccer before and after World Cup 2018"
 					variables={[
 						{
-							datapath:
-								"data/sankey_plot/sankey_diagram_.json",
+							datapath: "data/sankey_plot/sankey_diagram_.json",
 							name: "Sankey soccer",
 						},
 					]}
@@ -300,7 +310,29 @@ export default function Home() {
 					{(variable) => (
 						<BubbleChart
 							dataPath={variable}
-                            colors={["#165B33"]}
+							colors={["#165B33"]}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
+				<VariableChooserComponent
+					Title="Line plot of delta view"
+					variables={[
+						{
+							datapath: "data/lineplot_data.csv",
+							name: "LIne Chart",
+						},
+					]}
+				>
+					{(variable) => (
+						<LineDottedPlotChart
+							datapath={variable}
+							colors={[
+								"#165B33",
+								"#FF5733",
+								"#33FF57",
+								"#3357FF",
+							]}
 							loading={<LoadingSpinner />}
 						/>
 					)}
