@@ -54,11 +54,20 @@ function LinePlotChart({ datapath }) {
                     y: data.map((row) => row[index + 1]),
                     type: "line",
                     name: `Line ${index + 1}: ${col}`,
+                    // line: { color: ["#FF5733", "#33FF57", "#3357FF"][index % 3] }, // Specify your colors here
                 }))}
                 layout={{
                     title: { text: "Line Plot" },
-                    xaxis: { title: { text: columns[0] } },
-                    yaxis: { title: { text: "Values" } },
+                    xAxis: { title: { text: columns[0] } },
+                    yAxis: { title: { text: "Values" } },
+                    transition: {
+                        duration: 1000,
+                        easing: "cubic-in-out",
+                    },
+                    frame: {
+                        duration: 1000,
+                    },
+                    responsive: true,
                 }}
             />
         </div>
