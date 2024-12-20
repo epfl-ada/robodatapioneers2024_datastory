@@ -272,7 +272,6 @@ export default function Home() {
 					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
 				/>
 				<BubbleChartComponent loading={<LoadingSpinner />} />
-				<BoxPlotChart loading={<LoadingSpinner />} />
 				<VariableChooserComponent
                     Title="Box plot of delta view"
 					variables={[
