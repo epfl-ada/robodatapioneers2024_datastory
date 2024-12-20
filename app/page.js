@@ -98,6 +98,42 @@ function VariableChooserComponentLDA({ Title, variables, children }) {
 	);
 }
 
+function VariableChooserComponentImage({ Title, variables }) {
+    const [selectedVariable, setSelectedVariable] = useState(
+        variables[0].datapath
+    );
+
+    const handleChange = (e) => {
+        setSelectedVariable(e.target.value);
+    };
+
+    return (
+        <div className="flex flex-col space-y-2 p-4 max-w-4xl">
+            <h3 className="text-2xl font-bold mb-2">{Title}</h3>
+            {variables.length > 1 && (
+                <select
+                    value={selectedVariable}
+                    onChange={handleChange}
+                    className="p-2 border border-gray-300 rounded-md"
+                >
+                    {variables.map((variable, index) => (
+                        <option key={index} value={variable.datapath}>
+                            {variable.name}
+                        </option>
+                    ))}
+                </select>
+            )}
+            <Image
+                src={selectedVariable}
+                alt={Title}
+                layout="responsive"
+                width={80}
+                height={80}
+            />
+        </div>
+    );
+}
+
 export default function Home() {
 	return (
 		<>

@@ -131,7 +131,7 @@ function Footer() {
 	];
 
 	return (
-		<footer className="bg-blue-500 text-white py-12 mt-8">
+		<footer className="bg-green2-300 text-white py-12 mt-8">
 			<div className="container mx-auto px-4">
 				<div className="mb-8">
 					<h2 className="text-2xl font-bold mb-4 text-center">
@@ -169,8 +169,8 @@ function Footer() {
 						))}
 					</div>
 				</div>
-				<div className="text-center border-t border-blue-400 pt-4">
-					<p>© 2024 Sports Analytics Project. All rights reserved.</p>
+				<div className="text-center border-t border-green2-400 pt-4">
+					<p>© 2024 robodatapioneers2024. All rights reserved.</p>
 				</div>
 			</div>
 		</footer>
