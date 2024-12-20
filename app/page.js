@@ -416,7 +416,23 @@ export default function Home() {
 						with a single, comprehensive metric.
 					</p>
 				</div>
-				asoidfjqowiejf
+				<VariableChooserComponent
+					Title="Average view count for videos of different sport events"
+					variables={[
+						{
+							datapath:
+								"data/part_2_plot/avg_view_count_sports_events.csv",
+							name: "Average view count",
+						},
+					]}
+				>
+					{(variable) => (
+						<BarPlotChart
+							dataPath={variable}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
 					<p className="text-lg text-left">
 						The plot reveals that the <b>FIFA World Cup</b> leads
@@ -619,9 +635,15 @@ export default function Home() {
 						First, the following chart visualizes the number of
 						video uploads for each sport on YouTube over time.
 					</p>
-					<h3 className="text-2xl font-bold mb-2">
-						transition chart will come here
-					</h3>
+				</div>
+				<RacingChartComponent
+					dataPath={"data/third_plot/sport_transit.csv"}
+					xName={"Number of videos"}
+					yName={"Sport category"}
+					loading={<LoadingSpinner />}
+				/>
+				<div></div>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<p>
 						Interesting observation includes that between 2005 and
 						2012, hockey dominated YouTube, driven by major events
@@ -660,15 +682,97 @@ export default function Home() {
 					</p>
 				</div>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
-					<h2 className="text-2xl font-bold mb-2">
-						Difference in difference Next
-					</h2>
+					<h3 className="text-1xl font-bold mb-2">
+						Difference in difference
+					</h3>
 					<p>
-						We explore the how much sport-events affect the
-						engagement
+						We investigated how specific sports events contribute to
+						engagement on YouTube using Difference-in-Differences
+						(DID). The analysis focused on data from 2017-2018, a
+						period when YouTube was becoming more mature. We
+						examined how the delta_view (change in views) of videos
+						in the period before and after sports events changed for
+						five sports: football, skiing, basketball, hockey, and
+						rugby. The corresponding events were: FIFA 2018, Winter
+						Olympics 2018, NBA Finals 2018, Stanley Cup Finals 2018,
+						and Rugby World Cup Sevens 2018. The control group was
+						the average delta_view of videos from sports unrelated
+						to the events, and the sport group was the average
+						delta_view of videos related to the event in question.
+					</p>
+					<p>
+						The key finding is that not all sports events contribute
+						to increased engagement in their respective sports.
+					</p>
+					<p>
+						<strong>Football and Skiing:</strong>
+						These two sports show the most significant impact from
+						their events, as the graphs clearly demonstrate.
+						However, when examining the p-values, football shows all
+						p-values below 0.05, indicating a strong, positive
+						impact from the FIFA 2018 event, with statistically
+						significant coefficients for both the treatment and
+						interaction terms. On the other hand, skiing shows a
+						weaker and less consistent pattern, with the Winter
+						Olympics having little effect on engagement and no
+						significant interaction term. It&#39;s important to note
+						that for this DID analysis, we examined the data for 4
+						months before and 4 months after the events. Therefore,
+						we can conclude that user engagement for skiing did not
+						sustain for long after the Winter Olympics.
+					</p>
+					<p>
+						<strong>Basketball, Hockey, and Rugby:</strong>
+						For these sports, the events did not show a substantial
+						increase in engagement. Particularly surprising was the
+						lack of change in engagement after the NBA Finals.
+						Despite the large number of basketball-related videos,
+						there was no noticeable shift in engagement. This could
+						be due to the NBA Finals being a U.S.-centric event, not
+						a global competition, and since it is a culmination of
+						the season, engagement may not increase significantly
+						afterward. For hockey, the post-event engagement
+						actually decreased, which is puzzling. This could be
+						because the Stanley Cup Finals took place in June, a
+						time when interest in winter sports, like hockey,
+						typically wanes, suggesting that the timing of the event
+						is critical in sustaining user interest.
+					</p>
+					<p>
+						From these findings, it is clear that sports events do
+						not always affect engagement on YouTube. However, for
+						sports like football and skiing, the effect was
+						noticeable. Additionally, it can be concluded that for
+						minor-sports to capture more attention, the event needs
+						to be held on a global scale and during an appropriate
+						season for the sport.
 					</p>
 				</div>
-				images
+				<VariableChooserComponentImage
+					Title=""
+					variables={[
+						{
+							datapath: "data/diff_in_diff/basketball_DID.png",
+							name: "Basketball DID",
+						},
+						{
+							datapath: "data/diff_in_diff/football_DID.png",
+							name: "Football DID",
+						},
+						{
+							datapath: "data/diff_in_diff/hockey_DID.png",
+							name: "Hockey DID",
+						},
+						{
+							datapath: "data/diff_in_diff/rugby_DID.webp",
+							name: "Rugby DID",
+						},
+						{
+							datapath: "data/diff_in_diff/skiing_DID.png",
+							name: "Skiing DID",
+						},
+					]}
+				/>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<h1 className="text-3xl font-bold mb-2">
 						<strong>Part 4: User Engagement Over Time</strong>
@@ -827,12 +931,6 @@ export default function Home() {
 					title="Create Next App"
 					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
 				/>
-				<RacingChartComponent
-					dataPath={"data/third_plot/sport_transit.csv"}
-					xName={"Number of videos"}
-					yName={"Sport category"}
-					loading={<LoadingSpinner />}
-				/>
 				<SubTitleText
 					title="Create Next App"
 					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
@@ -852,7 +950,7 @@ export default function Home() {
 					]}
 				>
 					{(variable) => (
-						<BoxPlotChart
+						<BarPlotChart
 							datapath={variable}
 							loading={<LoadingSpinner />}
 						/>
