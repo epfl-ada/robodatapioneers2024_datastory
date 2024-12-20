@@ -62,7 +62,7 @@ function LinePlotChart({ datapath }) {
                     yaxis: { title: { text: "Values" } },
                     transition: {
                         duration: 1000,
-                        easing: "cubic-in-out",
+                        easing: "ease-in-out",
                     },
                     frame: {
                         duration: 1000,
