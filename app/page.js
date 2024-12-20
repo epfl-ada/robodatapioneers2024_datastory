@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import {
 	LoadingSpinner,
 	ChartComponent,
-	RacingChartComponent,
 	BubbleChartComponent,
 } from "./data_charts.js";
 import { BoxPlotChart } from "./box_plot_chart.js";
 import { LinePlotChart } from "./line_chart.js";
 import { BarPlotChart } from "./bar_chart.js";
+import { RacingChartComponent } from "./racing_chart.js"
 import { NavBar } from "./nav.js";
 import { Footer, LandingPage } from "./home_layout.js";
 import { IframeChart } from "./iframe_charts.js";
@@ -99,7 +99,10 @@ export default function Home() {
 					title="Create Next App"
 					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
 				/>
-				<RacingChartComponent loading={<LoadingSpinner />} />
+				<RacingChartComponent
+					dataPath={"data/third_plot/sport_transit.csv"}
+					loading={<LoadingSpinner />}
+				/>
 				<SubTitleText
 					title="Create Next App"
 					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
@@ -170,31 +173,36 @@ export default function Home() {
 						/>
 					)}
 				</VariableChooserComponent>
-                <VariableChooserComponent
-                    Title="Line plot of delta view"
-                    variables={[
-                        {
-                            datapath: "data/barplot_data.csv",
-                            name: "Delta Subs",
-                        },
-                    ]}
-                >
-                    {(variable) => (
-                        <BarPlotChart
-                            datapath={variable}
-                            colors={["#165B33", "#FF5733", "#33FF57", "#3357FF"]}
-                            loading={<LoadingSpinner />}
-                        />
-                    )}
-                </VariableChooserComponent>
-                <div className="flex justify-center w-full align-center">
-                    <IframeChart
-                        title="Iframe Chart"
-                        src="lda_world_cup_football.html"
-                    />
-                </div>
-            </main>
-            <Footer />
-        </>
-    );
+				<VariableChooserComponent
+					Title="Line plot of delta view"
+					variables={[
+						{
+							datapath: "data/barplot_data.csv",
+							name: "Delta Subs",
+						},
+					]}
+				>
+					{(variable) => (
+						<BarPlotChart
+							datapath={variable}
+							colors={[
+								"#165B33",
+								"#FF5733",
+								"#33FF57",
+								"#3357FF",
+							]}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
+				<div className="flex justify-center w-full align-center">
+					<IframeChart
+						title="Iframe Chart"
+						src="lda_world_cup_football.html"
+					/>
+				</div>
+			</main>
+			<Footer />
+		</>
+	);
 }
