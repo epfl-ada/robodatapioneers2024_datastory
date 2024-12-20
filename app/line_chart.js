@@ -15,7 +15,7 @@ import { useEffect, useState } from "react";
 function LinePlotChart({ datapath }) {
     const [data, setData] = useState([]);
     const [columns, setColumns] = useState([]);
-    const [yData, setYData] = useState([]);
+    const [xData, setXData] = useState([]);
 
     useEffect(() => {
         console.log("LinePlotChart component mounted with datapath:", datapath);
@@ -31,12 +31,12 @@ function LinePlotChart({ datapath }) {
                         const parsedData = result.data.slice(1).map((row) =>
                             row.map((cell) => parseFloat(cell.trim()))
                         );
-                        const yValues = result.data
+                        const xValues = result.data
 							.slice(1)
 							.map((row) => row[0].trim());
                         setColumns(columns);
                         setData(parsedData);
-                        setYData(yValues);
+                        setXData(xValues);
                     },
                     header: false,
                 });
@@ -44,13 +44,13 @@ function LinePlotChart({ datapath }) {
             .catch((error) => console.error("Error loading CSV data:", error));
     }, [datapath]);
 
-    console.log("hello", data, columns, yData);
+    console.log("hello", data, columns, xData);
 
     return (
         <div className="w-full max-w-2xl">
             <Plot
                 data={columns.slice(1).map((col, index) => ({
-                    x: yData,
+                    x: xData,
                     y: data.map((row) => row[index + 1]),
                     type: "line",
                     name: `Line ${index + 1}: ${col}`,
