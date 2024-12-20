@@ -10,6 +10,7 @@ import {
 } from "./data_charts.js";
 import { BoxPlotChart } from "./box_plot_chart.js";
 import { LinePlotChart } from "./line_chart.js";
+import { BarPlotChart } from "./bar_chart.js";
 import { NavBar } from "./nav.js";
 import { Footer, LandingPage } from "./home_layout.js";
 
@@ -140,6 +141,22 @@ export default function Home() {
                 >
                     {(variable) => (
                         <LinePlotChart
+                            datapath={variable}
+                            loading={<LoadingSpinner />}
+                        />
+                    )}
+                </VariableChooserComponent>
+                <VariableChooserComponent
+                    title="Line plot of delta view"
+                    variables={[
+                        {
+                            datapath: "data/barplot_data.csv",
+                            name: "Delta Subs",
+                        },
+                    ]}
+                >
+                    {(variable) => (
+                        <BarPlotChart
                             datapath={variable}
                             loading={<LoadingSpinner />}
                         />
