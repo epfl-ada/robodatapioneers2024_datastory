@@ -1,130 +1,127 @@
 "use client";
 
-import dynamic from "next/dynamic";
-const Plot = dynamic(() => import("react-plotly.js"), { ssr: false });
+import { useEffect, useRef, useState } from "react";
 import Papa from "papaparse";
-import { useEffect, useState } from "react";
+import {
+	Chart,
+	BubbleController,
+	LinearScale,
+	Title,
+	Tooltip,
+	Legend,
+	PointElement,
+} from "chart.js";
 
-function BubbleChart({ datapath, colors }) {
-    const [bubbleData, setBubbleData] = useState([]);
-    const [years, setYears] = useState([]);
-    const [columns, setColumns] = useState([]);
+Chart.register(
+	BubbleController,
+	LinearScale,
+	Title,
+	Tooltip,
+	Legend,
+	PointElement
+);
 
-    useEffect(() => {
-        fetch(datapath)
-            .then((res) => res.text())
-            .then((csv) => {
-                Papa.parse(csv, {
-                    complete: (result) => {
-                        const header = result.data[0].map((c) => c.trim());
-                        const rows = result.data.slice(1).map((r) => r.map((c) => c.trim()));
-                        const uniqueYears = [...new Set(rows.map((r) => r[0]))];
-                        const traces = uniqueYears.map((year) => {
-                            const yearData = rows.filter((row) => row[0] === year);
-                            return {
-                                name: year,
-                                x: yearData.map((d) => parseFloat(d[1])),
-                                y: yearData.map((d) => parseFloat(d[2])),
-                                text: yearData.map((d) => d[3]),
-                                mode: "markers",
-                                marker: {
-                                    size: yearData.map((d) => parseFloat(d[4])),
-                                    color: colors,
-                                    sizemode: "area",
-                                },
-                            };
-                        });
-                        setColumns(header);
-                        setYears(uniqueYears);
-                        setBubbleData(traces);
-                    },
-                });
-            })
-            .catch((err) => console.error("CSV load error:", err));
-    }, [datapath, colors]);
+function BubbleChart() {
+	const chartRef = useRef(null);
 
-    // Each frame corresponds to one year
-    const frames = bubbleData.map((trace) => ({
-        name: trace.name,
-        data: [trace],
-    }));
+	useEffect(() => {
+		const ctx = chartRef.current.getContext("2d");
 
-    // Create slider steps for each year
-    const sliderSteps = bubbleData.map((trace, i) => ({
-        label: trace.name,
-        method: "animate",
-        args: [
-            [trace.name],
-            {
-                mode: "immediate",
-                transition: { duration: 500 },
-                frame: { duration: 500, redraw: false },
-            },
-        ],
-    }));
+		new Chart(ctx, {
+			type: "bubble",
+			data: {
+				labels: "Africa",
+				datasets: [
+					{
+						label: ["China"],
+						backgroundColor: "rgba(255,221,50,0.2)",
+						borderColor: "rgba(255,221,50,1)",
+						data: [
+							{
+								x: 21269017,
+								y: 5.245,
+								r: 9,
+							},
+						],
+					},
+					{
+						label: ["Denmark"],
+						backgroundColor: "rgba(60,186,159,0.2)",
+						borderColor: "rgba(60,186,159,1)",
+						data: [
+							{
+								x: 258702,
+								y: 7.526,
+								r: 10,
+							},
+						],
+					},
+					{
+						label: ["Germany"],
+						backgroundColor: "rgba(0,0,0,0.2)",
+						borderColor: "#000",
+						data: [
+							{
+								x: 3979083,
+								y: 6.994,
+								r: 80,
+							},
+						],
+					},
+					{
+						label: ["Japan"],
+						backgroundColor: "rgba(193,46,12,0.2)",
+						borderColor: "rgba(193,46,12,1)",
+						data: [
+							{
+								x: 4931877,
+								y: 5.921,
+								r: 15,
+							},
+						],
+					},
+				],
+			},
+			options: {
+				title: {
+					display: true,
+					text: "Predicted world population (millions) in 2050",
+				},
+				scales: {
+					y: {
+						title: {
+							display: true,
+							text: "Happiness",
+						},
+					},
+					x: {
+						title: {
+							display: true,
+							text: "GDP (PPP)",
+						},
+					},
+				},
+			},
+		});
 
-    const layout = {
-        title: "Animated Bubble Chart",
-        xaxis: { title: columns[1] },
-        yaxis: { title: columns[2] },
-        showlegend: false,
-        updatemenus: [
-            {
-                type: "buttons",
-                x: 0.1,
-                y: 1.15,
-                xanchor: "left",
-                yanchor: "top",
-                showactive: false,
-                buttons: [
-                    {
-                        label: "Play",
-                        method: "animate",
-                        args: [
-                            null,
-                            {
-                                fromcurrent: true,
-                                frame: { duration: 500, redraw: false },
-                                transition: { duration: 500 },
-                            },
-                        ],
-                    },
-                    {
-                        label: "Pause",
-                        method: "animate",
-                        args: [
-                            [null],
-                            {
-                                mode: "immediate",
-                                frame: { duration: 0, redraw: false },
-                            },
-                        ],
-                    },
-                ],
-            },
-        ],
-        sliders: [
-            {
-                active: 0,
-                steps: sliderSteps,
-                x: 0.1,
-                y: 0,
-                len: 0.9,
-            },
-        ],
-    };
+		// Cleanup function to destroy the chart instance
+		return () => {
+			if (ctx) {
+				ctx.chart && ctx.chart.destroy();
+			}
+		};
+	}, []);
 
-    return (
-        <div className="w-full max-w-2xl">
-            <Plot
-                data={[bubbleData[0]]}
-                layout={layout}
-                frames={frames}
-                config={{ scrollZoom: false }}
-                style={{ width: "100%", height: "600px" }}
-            />
-        </div>
-    );
-}
+	return (
+		<div className="w-full max-w-2xl">
+			<canvas
+				id="bubble-chart"
+				ref={chartRef}
+				width={800}
+				height={800}
+			></canvas>
+		</div>
+	);
+};
 
 export { BubbleChart };

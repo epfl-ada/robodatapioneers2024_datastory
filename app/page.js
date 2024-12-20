@@ -57,6 +57,40 @@ function VariableChooserComponent({ Title, variables, children }) {
     );
 }
 
+function VariableChooserComponentLDA({ Title, variables, children }) {
+    const [selectedVariable, setSelectedVariable] = useState(
+        variables[0].datapath
+    );
+
+    const handleChange = (e) => {
+        setSelectedVariable(e.target.value);
+    };
+
+    return (
+		<div className="flex justify-center w-full max-w-7xl align-center flex-col">
+			<h3 className="text-2xl font-bold mb-2 text-center">{Title}</h3>
+			{variables.length > 1 && (
+				<select
+					value={selectedVariable}
+					onChange={handleChange}
+					className="p-2 border border-gray-300 rounded-md"
+				>
+					{variables.map((variable, index) => (
+						<option key={index} value={variable.datapath}>
+							{variable.name}
+						</option>
+					))}
+				</select>
+			)}
+            <div className="flex justify-center w-full align-center flex-col">
+			{children(selectedVariable)}
+            </div>
+		</div>
+	);
+}
+
+
+
 export default function Home() {
 	return (
 		<>
@@ -193,15 +227,32 @@ export default function Home() {
 						/>
 					)}
 				</VariableChooserComponent>
-				<div className="flex justify-center w-full align-center flex-col">
-					<h3 className="text-2xl font-bold mb-2 text-center p-4">
-						Topic modeling LDA
-					</h3>
-					<IframeChart
-						title="Iframe Chart"
-						src="lda_world_cup_football.html"
-					/>
-				</div>
+                <VariableChooserComponentLDA
+                    Title="Topic modeling LDA"
+                    variables={[
+                        {
+                            datapath: "lda_world_cup_football.html",
+                            name: "LDA World Cup Football",
+                        },
+                        {
+                            datapath: "lda_olympics.html",
+                            name: "LDA Olympics",
+                        },
+                        {
+                            datapath: "lda_nba.html",
+                            name: "LDA NBA",
+                        },
+                    ]}
+                    >
+
+                        {(variable) => (
+                            <IframeChart
+                                src={variable}
+                                loading={<LoadingSpinner />}
+                            />
+                        )}
+
+                </VariableChooserComponentLDA>
 				<VariableChooserComponent
 					Title="Line plot of delta view"
 					variables={[
@@ -241,14 +292,15 @@ export default function Home() {
 					Title="Line plot of delta view"
 					variables={[
 						{
-							datapath: "bubble_data.csv",
+							datapath: "data/bubble_data.csv",
 							name: "Bubble Chart",
 						},
 					]}
 				>
 					{(variable) => (
 						<BubbleChart
-							datapath={variable}
+							dataPath={variable}
+                            colors={["#165B33"]}
 							loading={<LoadingSpinner />}
 						/>
 					)}
