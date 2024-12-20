@@ -24,31 +24,33 @@ function SubTitleText({ title, text }) {
 }
 
 function VariableChooserComponent({ Title, variables, children }) {
-	const [selectedVariable, setSelectedVariable] = useState(
-		variables[0].datapath
-	);
+    const [selectedVariable, setSelectedVariable] = useState(
+        variables[0].datapath
+    );
 
-	const handleChange = (e) => {
-		setSelectedVariable(e.target.value);
-	};
+    const handleChange = (e) => {
+        setSelectedVariable(e.target.value);
+    };
 
-	return (
-		<div className="flex flex-col space-y-2 p-4 max-w-4xl">
-			<h2 className="text-2xl font-bold mb-2">{Title}</h2>
-			<select
-				value={selectedVariable}
-				onChange={handleChange}
-				className="p-2 border border-gray-300 rounded-md"
-			>
-				{variables.map((variable, index) => (
-					<option key={index} value={variable.datapath}>
-						{variable.name}
-					</option>
-				))}
-			</select>
-			{children(selectedVariable)}
-		</div>
-	);
+    return (
+        <div className="flex flex-col space-y-2 p-4 max-w-4xl">
+            <h2 className="text-2xl font-bold mb-2">{Title}</h2>
+            {variables.length > 1 && (
+                <select
+                    value={selectedVariable}
+                    onChange={handleChange}
+                    className="p-2 border border-gray-300 rounded-md"
+                >
+                    {variables.map((variable, index) => (
+                        <option key={index} value={variable.datapath}>
+                            {variable.name}
+                        </option>
+                    ))}
+                </select>
+            )}
+            {children(selectedVariable)}
+        </div>
+    );
 }
 
 export default function Home() {
@@ -103,7 +105,7 @@ export default function Home() {
 				/>
 				<BubbleChartComponent loading={<LoadingSpinner />} />
 				<VariableChooserComponent
-                    Title="Box plot of delta view"
+					Title="Box plot of delta view"
 					variables={[
 						{
 							datapath: "data/boxplot_data.csv",
@@ -122,32 +124,53 @@ export default function Home() {
 						/>
 					)}
 				</VariableChooserComponent>
+				<VariableChooserComponent
+					title="Line plot of delta view"
+					variables={[
+						{
+							datapath:
+								"data/first_plot/sum_delta_subs_overtime.csv",
+							name: "Delta Subs",
+						},
+						{
+							datapath:
+								"data/first_plot/sum_delta_videos_overtime.csv",
+							name: "Delta Videos",
+						},
+						{
+							datapath:
+								"data/first_plot/sum_delta_views_overtime.csv",
+							name: "Delta Views",
+						},
+					]}
+				>
+					{(variable) => (
+						<LinePlotChart
+							datapath={variable}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
+				<VariableChooserComponent
+					title="Line plot of delta view"
+					variables={[
+						{
+							datapath:
+								"data/second_plot/fre_popular_sports_tags.csv",
+							name: "Delta Subs",
+						},
+					]}
+				>
+					{(variable) => (
+						<BarPlotChart
+							datapath={variable}
+							colors={["#165B33"]}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
                 <VariableChooserComponent
-                    title="Line plot of delta view"
-                    variables={[
-                        {
-                            datapath: "data/first_plot/sum_delta_subs_overtime.csv",
-                            name: "Delta Subs",
-                        },
-                        {
-                            datapath: "data/first_plot/sum_delta_videos_overtime.csv",
-                            name: "Delta Videos",
-                        },
-                        {
-                            datapath: "data/first_plot/sum_delta_views_overtime.csv",
-                            name: "Delta Views",
-                        }
-                    ]}
-                >
-                    {(variable) => (
-                        <LinePlotChart
-                            datapath={variable}
-                            loading={<LoadingSpinner />}
-                        />
-                    )}
-                </VariableChooserComponent>
-                <VariableChooserComponent
-                    title="Line plot of delta view"
+                    Title="Line plot of delta view"
                     variables={[
                         {
                             datapath: "data/barplot_data.csv",
@@ -158,6 +181,7 @@ export default function Home() {
                     {(variable) => (
                         <BarPlotChart
                             datapath={variable}
+                            colors={["#165B33", "#FF5733", "#33FF57", "#3357FF"]}
                             loading={<LoadingSpinner />}
                         />
                     )}
