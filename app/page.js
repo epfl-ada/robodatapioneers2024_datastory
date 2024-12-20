@@ -11,6 +11,7 @@ import { BoxPlotChart } from "./box_plot_chart.js";
 import { LinePlotChart } from "./line_chart.js";
 import { BarPlotChart } from "./bar_chart.js";
 import { RacingChartComponent } from "./racing_chart.js"
+import { HeatMapChar } from "./heatmap.js";
 import { NavBar } from "./nav.js";
 import { Footer, LandingPage } from "./home_layout.js";
 import { IframeChart } from "./iframe_charts.js";
@@ -35,7 +36,7 @@ function VariableChooserComponent({ Title, variables, children }) {
 
     return (
         <div className="flex flex-col space-y-2 p-4 max-w-4xl">
-            <h2 className="text-2xl font-bold mb-2">{Title}</h2>
+            <h3 className="text-2xl font-bold mb-2">{Title}</h3>
             {variables.length > 1 && (
                 <select
                     value={selectedVariable}
@@ -197,12 +198,30 @@ export default function Home() {
 						/>
 					)}
 				</VariableChooserComponent>
-				<div className="flex justify-center w-full align-center">
+				<div className="flex justify-center w-full align-center flex-col">
+                    <h3 className="text-2xl font-bold mb-2 text-center p-4">Topic modeling LDA</h3>
 					<IframeChart
 						title="Iframe Chart"
 						src="lda_world_cup_football.html"
 					/>
 				</div>
+                <VariableChooserComponent
+                    Title="Line plot of delta view"
+                    variables={[
+                        {
+                            datapath: "data/second_plot/fre_popular_sports_tags.csv",
+                            name: "Delta Subs",
+                        },
+                    ]}
+                >
+                    {(variable) => (
+                        <HeatMapChar
+                            datapath={variable}
+                            colors={["#165B33"]}
+                            loading={<LoadingSpinner />}
+                        />
+                    )}
+                </VariableChooserComponent>
 			</main>
 			<Footer />
 		</>

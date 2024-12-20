@@ -58,8 +58,8 @@ function LinePlotChart({ datapath }) {
                 }))}
                 layout={{
                     title: { text: "Line Plot" },
-                    xAxis: { title: { text: columns[0] } },
-                    yAxis: { title: { text: "Values" } },
+                    xaxis: { title: { text: columns[0] } },
+                    yaxis: { title: { text: "Values" } },
                     transition: {
                         duration: 1000,
                         easing: "cubic-in-out",
