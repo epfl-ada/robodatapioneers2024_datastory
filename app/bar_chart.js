@@ -12,7 +12,7 @@ const Plot = dynamic(() => import("react-plotly.js"), {
 import Papa from "papaparse";
 import { useEffect, useState } from "react";
 
-function BarPlotChart({ datapath, colors }) {
+function BarPlotChart({ datapath, colors, barmode="group" }) {
     const [data, setData] = useState([]);
     const [columns, setColumns] = useState([]);
     const [xData, setXData] = useState([]);
@@ -65,7 +65,7 @@ function BarPlotChart({ datapath, colors }) {
                     xaxis: { title: { text: columns[0] } },
                     yaxis: { title: { text: columns[1] } },
                     bargap: 0.2,
-                    barmode: "group",
+                    barmode: barmode,
                 }}
             />
         </div>
