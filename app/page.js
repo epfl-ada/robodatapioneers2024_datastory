@@ -18,6 +18,7 @@ import { IframeChart } from "./iframe_charts.js";
 import { BubbleChart } from "./bubble_chart.js";
 import { SankeyChart } from "./sankey_chart.js";
 import { LineDottedPlotChart } from "./line_chart_dotted.js";
+import { worldCupLDA, olympicLDA, nbaLDA } from "./lda_texts.js"
 
 function SubTitleText({ title, text }) {
 	return (
@@ -29,11 +30,11 @@ function SubTitleText({ title, text }) {
 }
 
 function Paragraph({ text }) {
-    return (
-        <div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
-            <p className="text-lg text-left">{text}</p>
-        </div>
-    );
+	return (
+		<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
+			<p className="text-lg text-left">{text}</p>
+		</div>
+	);
 }
 
 function VariableChooserComponent({ Title, variables, children }) {
@@ -99,39 +100,39 @@ function VariableChooserComponentLDA({ Title, variables, children }) {
 }
 
 function VariableChooserComponentImage({ Title, variables }) {
-    const [selectedVariable, setSelectedVariable] = useState(
-        variables[0].datapath
-    );
+	const [selectedVariable, setSelectedVariable] = useState(
+		variables[0].datapath
+	);
 
-    const handleChange = (e) => {
-        setSelectedVariable(e.target.value);
-    };
+	const handleChange = (e) => {
+		setSelectedVariable(e.target.value);
+	};
 
-    return (
-        <div className="flex flex-col space-y-2 p-4 max-w-4xl">
-            <h3 className="text-2xl font-bold mb-2">{Title}</h3>
-            {variables.length > 1 && (
-                <select
-                    value={selectedVariable}
-                    onChange={handleChange}
-                    className="p-2 border border-gray-300 rounded-md"
-                >
-                    {variables.map((variable, index) => (
-                        <option key={index} value={variable.datapath}>
-                            {variable.name}
-                        </option>
-                    ))}
-                </select>
-            )}
-            <Image
-                src={selectedVariable}
-                alt={Title}
-                layout="responsive"
-                width={80}
-                height={80}
-            />
-        </div>
-    );
+	return (
+		<div className="flex flex-col space-y-2 p-4 max-w-4xl">
+			<h3 className="text-2xl font-bold mb-2">{Title}</h3>
+			{variables.length > 1 && (
+				<select
+					value={selectedVariable}
+					onChange={handleChange}
+					className="p-2 border border-gray-300 rounded-md"
+				>
+					{variables.map((variable, index) => (
+						<option key={index} value={variable.datapath}>
+							{variable.name}
+						</option>
+					))}
+				</select>
+			)}
+			<Image
+				src={selectedVariable}
+				alt={Title}
+				layout="responsive"
+				width={80}
+				height={80}
+			/>
+		</div>
+	);
 }
 
 export default function Home() {
@@ -186,11 +187,519 @@ export default function Home() {
 						/>
 					)}
 				</VariableChooserComponent>
-				<Paragraph
-					text="Football, basketball, and wrestling reign supreme on YouTube, showcasing their immense global popularity and passionate fan bases. These sports attract millions of views and countless dedicated channels, creating vibrant communities where fans engage, share highlights, and celebrate their favorite moments!
-
-                    Now, let’s dive into the most frequently featured elements in sports content and discover what truly captivates fans around the world! Our Wordcloud visualizes the top keywords and trends that drive engagement on YouTube."
-				></Paragraph>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
+					<p className="text-lg text-left">
+						Football, basketball, and wrestling reign supreme on
+						YouTube, showcasing their immense global popularity and
+						passionate fan bases. These sports attract millions of
+						views and countless dedicated channels, creating vibrant
+						communities where fans engage, share highlights, and
+						celebrate their favorite moments!
+						<br></br>
+						<br></br>
+						Now, let’s dive into the most frequently featured
+						elements in sports content and discover what truly
+						captivates fans around the world! Our Wordcloud
+						visualizes the top keywords and trends that drive
+						engagement on YouTube.
+					</p>
+				</div>
+				<p>woeifjoqiwejf</p>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
+					<p className="text-lg text-left">
+						Take a closer look at the word cloud—do you spot words
+						like "highlights," "versus," "boxing," "soccer,"
+						"league," and "NBA"? These buzzwords vividly capture the
+						excitement and competitive spirit that thrive on
+						YouTube. They reflect how fans engage with thrilling
+						game moments, intense rivalries, and major league
+						action, creating a dynamic and energetic sports
+						community online. This vibrant mix of terms not only
+						showcases what fans are passionate about but also
+						highlights how YouTube serves as the ultimate arena
+						where the adrenaline of sports competitions comes alive.
+						<br></br>
+						<br></br>
+						Ready to see your favorite moments and topics take
+						center stage? This is just the beginning of uncovering
+						the electrifying conversations that keep the sports
+						world buzzing on YouTube! Stay with us as we continue to
+						explore more trends and provide deeper analysis into the
+						ever-evolving intersection of sports and digital
+						engagement.
+					</p>
+				</div>
+				fqowijfqoiwjfoiqjwe
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
+					<h3 className="text-2xl font-bold mb-2">
+						Launching into Our Core Analysis
+					</h3>
+					<p className="text-lg text-left">
+						In this project, we like to answer the following
+						research questions:
+					</p>
+					<ul className="list-disc list-inside text-lg text-left pl-4">
+						<li>
+							How does YouTube's sports content change over time?
+						</li>
+						<li>
+							How do different major sports events (e.g., World
+							Cup, Olympics, NBA Finals) uniquely impact YouTube
+							engagement, trends, and general interests in sports
+							content? What types of sports-related content tend
+							to go viral during major sports events?
+						</li>
+						<li>
+							Which sports gain increased visibility during major
+							events? Do minority sports benefit in particular?
+						</li>
+						<li>
+							Do major sports events attract users who are
+							non-typical sports audiences on YouTube? How do
+							these events influence their engagement levels and
+							long-term interest in sports content?
+						</li>
+					</ul>
+				</div>
+				qoiwejfoqipwjefioqwjeopifj
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
+					<h2 className="text-2xl font-bold mb-2"></h2>
+					<p className="text-lg text-left">
+						In this part of the analysis, we focus on some of the
+						major sports events and their impact on YouTube
+						engagement. To accurately pinpoint videos related to
+						major sports events, we focused on analyzing video
+						titles, as titles are the most effective element for
+						capturing audience attention and driving engagement
+						compared to tags or descriptions. We began by defining a
+						set of keywords specific to each event and then expanded
+						these keywords to include various potential combinations
+						and synonyms. This comprehensive keyword strategy
+						allowed us to gather a robust collection of videos for
+						each specific event. By evaluating engagement based on
+						video titles, we ensured that our data truly reflects
+						the interests and attractions of the audience. This
+						method enabled us to effectively categorize and analyze
+						the performance of videos tied to significant sports
+						events. The following plot illustrates how major sports
+						events like the FIFA World Cup, the Olympics, and the
+						NBA Finals attract varying levels of viewer interest on
+						YouTube. We focused on <b>average view counts</b> as our
+						primary metric because our analysis using Spearman
+						correlation revealed a strong relationship between view
+						counts and other engagement metrics, such as likes and
+						dislikes. This high correlation indicates that view
+						counts are a reliable indicator of overall engagement,
+						allowing us to effectively represent audience interest
+						with a single, comprehensive metric.
+					</p>
+				</div>
+				asoidfjqowiejf
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
+					<p className="text-lg text-left">
+						The plot reveals that the <b>FIFA World Cup</b> leads
+						with the highest average view counts, followed by the{" "}
+						<b>NBA Finals</b>, the <b>Olympics</b>, and other major
+						sports events. This ranking highlights the unparalleled
+						global appeal of the FIFA World Cup, while the NBA
+						Finals and the Olympics also attract substantial viewer
+						interest on YouTube. Now that we've identified and
+						ranked the most engaging sports events, our focus shifts
+						to the video titles for a more comprehensive analysis.
+						To uncover the dominant themes and topics that capture
+						audience interest, we conducted a{" "}
+						<b>Latent Dirichlet Allocation (LDA)</b> analysis on the
+						titles of event-related videos. This technique allowed
+						us to extract and highlight the highest-ranking themes,
+						providing deeper insights into what drives viewer
+						engagement during major sports events.
+					</p>
+				</div>
+				<VariableChooserComponentLDA
+					Title="Topic modeling LDA"
+					variables={[
+						{
+							datapath: "lda_world_cup_football.html",
+							name: "LDA World Cup Football",
+						},
+						{
+							datapath: "lda_olympics.html",
+							name: "LDA Olympics",
+						},
+						{
+							datapath: "lda_nba.html",
+							name: "LDA NBA",
+						},
+					]}
+				>
+					{(variable) => (
+						<IframeChart
+							src={variable}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponentLDA>
+				{worldCupLDA()}
+				{olympicLDA()}
+				{nbaLDA()}
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<h3 className="text-1xl font-bold mb-2">LDA exploration</h3>
+					<p>
+						Building on our exploration of key themes identified in
+						the LDA clusters, we were also curious to uncover what
+						makes certain sports videos go viral on YouTube. To
+						achieve this, we created word clouds for the top 10%
+						most viewed videos across each major sports event
+						analyzed. These visualizations highlight the most
+						frequently used words in the titles of highly viewed
+						content, revealing the themes and topics that resonate
+						most with millions of viewers.
+					</p>
+				</div>
+				wordcloud images
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<p>
+						Beyond the dominant words like "world," "cup," and
+						"FIFA," our word cloud unveils fascinating patterns in
+						the most viewed World Cup videos. Notably, the 2018
+						World Cup emerges as the most viewed edition compared to
+						previous tournaments such as 2014 and 2010, reflecting a
+						surge in viewer engagement during this event. Words like
+						"match" and "qualifier" indicate that the most popular
+						videos are centered around actual games and qualifying
+						matches, showcasing the audience’s preference for live
+						action and competitive content. Additionally, the
+						frequent mention of country names such as France,
+						Croatia, Germany, and Argentina highlights the focus on
+						teams that reached the final stages, underscoring the
+						appeal of high-performing and successful nations. This
+						emphasis on key matches and top teams suggests that
+						viewers are particularly drawn to content featuring
+						pivotal moments and standout performances.
+					</p>
+				</div>
+				olympic wordcloud
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<p>
+						Our word cloud analysis for Olympic videos highlights
+						key themes such as "2012," "London," "highlights,"
+						"women," and "gold." The 2012 London Olympics stands out
+						for drawing significant attention, emphasizing the host
+						city's impact on the event’s appeal. "Highlights"
+						suggests a strong viewer interest in reliving the most
+						thrilling moments, while "women" reflects the growing
+						recognition of female athletes and their achievements.
+						The frequent mention of "gold" points to a universal
+						fascination with medal victories and top athletic
+						performances.
+					</p>
+				</div>
+				nba word
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<p>
+						Our word cloud analysis of NBA-related videos highlights
+						key terms such as{" "}
+						<strong>
+							&quot;Warriors,&quot; &quot;2019,&quot;
+							&quot;Cavaliers,&quot;
+						</strong>{" "}
+						and <strong>&quot;LeBron.&quot;</strong> The prominence
+						of &quot;Warriors&quot; and &quot;Cavaliers&quot;
+						reflects one of the most iconic rivalries in NBA
+						history, driven by multiple intense Finals matchups. The
+						frequent mention of &quot;2019&quot; points to the
+						dramatic NBA Finals showdown between the{" "}
+						<strong>Golden State Warriors</strong> and the{" "}
+						<strong>Toronto Raptors</strong>, a highly viewed and
+						memorable series.
+					</p>
+					<p>
+						<strong>LeBron James</strong> stands out as a recurring
+						figure, emphasizing his role as one of the most
+						talked-about players in NBA history. His leadership and
+						performances, especially during his time with the
+						Cavaliers and Lakers, continue to fuel fan engagement
+						and highlight reels.
+					</p>
+					<h3 className="text-2xl font-bold mb-2">
+						Connecting Themes and Virality
+					</h3>
+					<p>
+						Our analysis reveals a strong alignment between the{" "}
+						<strong>LDA clusters</strong> and the{" "}
+						<strong>word clouds</strong> generated from the most
+						viewed sports videos. The dominant themes identified
+						through LDA—such as iconic matchups, star players, and
+						historic events—are echoed in the word clouds,
+						emphasizing how these elements drive engagement and
+						define virality on YouTube. From{" "}
+						<strong>World Cup qualifiers</strong> and{" "}
+						<strong>Olympic gold medal moments</strong> to{" "}
+						<strong>NBA Finals rivalries</strong>, it’s clear that
+						fans are drawn to competitive stories, unforgettable
+						performances, and emotionally charged narratives. This
+						synergy between structured analysis and visual
+						representation highlights the shared patterns that make
+						sports content a global sensation on YouTube.
+					</p>
+					<h3 className="text-2xl font-bold mb-2">
+						Statistical Analysis: Comparing Event-Related and
+						Non-Event Videos
+					</h3>
+					<p>
+						To deepen our understanding of how major sports events
+						impact YouTube engagement, we conducted a statistical
+						comparison between event-related and non-event videos
+						uploaded during the same timeframe. Since the data
+						distribution was not normal, we employed the{" "}
+						<strong>Mann–Whitney U test</strong>, a non-parametric
+						statistical method suitable for comparing two
+						independent samples.
+					</p>
+					<p>
+						Our analysis focused on three major events:{" "}
+						<strong>Olympics 2016</strong>,{" "}
+						<strong>FIFA World Cup 2018</strong>, and{" "}
+						<strong>NBA Finals 2019</strong>. We compared the{" "}
+						<strong>delta_views</strong> (the change in view counts)
+						between videos directly related to these events and
+						unrelated sports videos uploaded during the same period.
+					</p>
+					<p>
+						The results showed{" "}
+						<strong>p-values less than 0.05</strong> for all three
+						events, indicating a{" "}
+						<strong>statistically significant difference</strong>{" "}
+						between event-related and non-event-related videos. This
+						finding confirms that videos linked to major sports
+						events experience notably higher viewership compared to
+						general sports content. The substantial increase in
+						engagement highlights the powerful influence of global
+						sports events in shaping online content consumption,
+						reinforcing YouTube’s role as a dynamic platform for
+						real-time sports coverage and fan interaction.
+					</p>
+				</div>
+				fqoijfoqwjefi
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<h1 className="text-3xl font-bold mb-2">
+						<strong>Part 3: Sport-Specific Focus</strong>
+					</h1>
+					<p>
+						In this part, we focus on sports and analyze our third
+						question: &quot;Which sports gain increased visibility
+						during major events?&quot;
+					</p>
+					<h3 id="each-sport-content-count-transition">
+						Each sport content count transition
+					</h3>
+					<p>
+						First, the following chart visualizes the number of
+						video uploads for each sport on YouTube over time.
+					</p>
+					<h3 className="text-2xl font-bold mb-2">
+						transition chart will come here
+					</h3>
+					<p>
+						Interesting observation includes that between 2005 and
+						2012, hockey dominated YouTube, driven by major events
+						like the NHL playoffs and Stanley Cup Finals, which
+						generated significant engagement, particularly in North
+						America. However, from 2013 onwards, football (soccer)
+						content began to outpace hockey due to the growing
+						global popularity of football, fueled by major
+						international events like the FIFA World Cup (2010,
+						2014) and the UEFA Champions League. These global
+						tournaments attracted massive viewership, especially
+						from regions such as Asia, Africa, and the Middle East,
+						and led to a surge in football-related content on
+						YouTube, including highlights, fan reactions, and
+						tactical analyses.
+					</p>
+					<p>
+						Football&#39;s global appeal, combined with the
+						increasing accessibility of YouTube, played a crucial
+						role in this shift. International football events
+						generated continuous streams of content, keeping fans
+						engaged year-round. Additionally, top European leagues
+						like the Premier League and La Liga contributed to the
+						volume of football content, particularly during
+						high-profile matches. The rise of mobile viewing and
+						better internet infrastructure further supported
+						football’s dominance on YouTube.
+					</p>
+					<p>
+						Therefore, the shift from hockey to football can be
+						attributed to football’s growing global reach, driven by
+						major sports events and YouTube’s expanding role as a
+						hub for sports content. These events sparked consistent
+						engagement, leading to football&#39;s dominance on the
+						platform.
+					</p>
+				</div>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<h2 className="text-2xl font-bold mb-2">
+						Difference in difference Next
+					</h2>
+					<p>
+						We explore the how much sport-events affect the
+						engagement
+					</p>
+				</div>
+				images
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<h1 className="text-3xl font-bold mb-2">
+						<strong>Part 4: User Engagement Over Time</strong>
+					</h1>
+					<p>
+						This section tracks how each user’s engagement with
+						videos of various sports changed over time using comment
+						data.
+					</p>
+					<p>
+						By integrating comment data with video metadata, we
+						quantified each user’s level of interest in different
+						sports (representing each user as a vector of interest
+						levels for each sport) and identified when and on which
+						sports videos they commented. For instance, we can track
+						how users showed interest in and commented on soccer
+						videos before, during, and after the FIFA 2018 Olympics.
+					</p>
+					<p>
+						In this analysis, we focused on three major single-sport
+						events on YouTube up to 2019: the 2018 FIFA World Cup
+						(soccer), the 2019 NBA Finals (basketball), and the 2015
+						Floyd Mayweather vs. Manny Pacquiao fight (boxing).
+						Multi-sport events like the Olympics were excluded to
+						avoid overlapping influences from different sports.
+					</p>
+					<p>
+						For each analysis, users were classified into three
+						groups based on their level of interest in the sport:
+					</p>
+					<ol>
+						<li>
+							<strong>“Often” group</strong>: Users who commented
+							mostly on videos of that sport, indicating they are
+							likely devoted fans.
+						</li>
+						<li>
+							<strong>“Sometimes” group</strong>: Users who
+							occasionally commented on that sport’s videos but
+							also engaged with other sports, showing moderate
+							interest.
+						</li>
+						<li>
+							<strong>“Seldom” group</strong>: Users who never
+							commented on that sport’s videos, implying little to
+							no interest.
+						</li>
+					</ol>
+					<p>
+						The analysis examines how these groups changed over
+						time—before (“before”), during (“during”), and after
+						(“after”) each event—and how users moved between groups.
+						The findings are based on a dataset of 8.6 billion
+						comments.
+					</p>
+				</div>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<h2 className="text-2xl font-bold mb-2">
+						FIFA World Cup 2018 Analysis
+					</h2>
+					<p>
+						In the FIFA World Cup analysis, the largest group,
+						represented in green, consisted of users who did not
+						comment on soccer videos at all during the period,
+						indicating little interest in soccer. The orange group
+						represented users with moderate interest, while the blue
+						group comprised highly interested soccer fans. The
+						results show that the number of highly engaged soccer
+						fans (blue group) remained steady throughout the event.
+						However, the moderately interested group (orange) nearly
+						doubled, with most users coming from the previously
+						uninterested group (green). This suggests that the World
+						Cup attracted attention not only from soccer fans but
+						also from users who typically didn’t watch soccer. This
+						trend aligns with the phenomenon of sports bars filling
+						up with casual viewers during the World Cup. However, by
+						the end of the event, the number of users in the orange
+						and blue groups returned to pre-event levels. This
+						indicates that while the World Cup temporarily sparked
+						interest in soccer among new users, it did not lead to a
+						lasting increase in engagement.
+					</p>
+					<p>
+						The second and third analyses focus on the 2019 NBA
+						Finals. Here, the meanings of the green, orange, and
+						blue groups remain the same. Similar to the FIFA World
+						Cup analysis, the NBA Finals succeeded in attracting
+						attention from users who typically had no interest in
+						basketball during the event. However, once the event
+						concluded, these users lost interest in the sport again.
+						These findings indicate that while major events can
+						temporarily draw users’ attention to a sport, their
+						impact is short-lived and does not lead to sustained
+						interest. From the perspective of promoting a sport,
+						relying solely on high-profile events to capture users’
+						interest is insufficient. In this analysis, videos were
+						simply selected based on their sports-related tags. For
+						future work, we plan to conduct a more detailed
+						classification of videos to achieve more refined
+						analytical results.
+					</p>
+				</div>
+				<VariableChooserComponent
+					Title="User comment flow chart for soccer before and after World Cup 2018"
+					variables={[
+						{
+							datapath: "data/sankey_plot/sankey_diagram_.json",
+							name: "Sankey soccer",
+						},
+						{
+							datapath:
+								"data/sankey_plot/sankey_diagram_basketball_2019.json",
+							name: "Sankey basketball",
+						},
+						{
+							datapath: "data/sankey_plot/sankey_diagram_boxing_2015.json",
+                            name: "Sankey boxing"
+						},
+					]}
+				>
+					{(variable) => (
+						<SankeyChart
+							dataPath={variable}
+							loading={<LoadingSpinner />}
+						/>
+					)}
+				</VariableChooserComponent>
+				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
+					<h2 className="text-2xl font-bold mb-2">Conclusion </h2>
+					<p>
+						In conclusion, our analysis highlights the dynamic
+						relationship between major sports events and YouTube
+						engagement, revealing how global competitions spark
+						temporary surges in user activity and content creation.
+						While events like the FIFA World Cup, the NBA Finals,
+						and the Olympics generate massive viewership and
+						increased content uploads, their influence on long-term
+						engagement appears limited. Viewers often return to
+						pre-event interest levels after the events conclude,
+						indicating that while major sports events capture broad
+						and diverse audiences, sustaining engagement requires
+						more than just occasional global spectacles.
+						Additionally, the evolving nature of sports video
+						titles, shifting toward more neutral and informative
+						content, reflects changes in creators’ strategies aimed
+						at appealing to a wider audience. By connecting user
+						engagement trends with content dynamics, our findings
+						provide valuable insights into how digital platforms
+						like YouTube mirror and shape real-world sports culture,
+						fostering both momentary excitement and enduring fan
+						communities.
+					</p>
+				</div>
 				<SubTitleText
 					title="Create Next App"
 					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
@@ -330,23 +839,6 @@ export default function Home() {
 					{(variable) => (
 						<SankeyChart
 							dataPath={variable}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponent>
-				<VariableChooserComponent
-					Title="Line plot of delta view"
-					variables={[
-						{
-							datapath: "data/bubble_data.csv",
-							name: "Bubble Chart",
-						},
-					]}
-				>
-					{(variable) => (
-						<BubbleChart
-							dataPath={variable}
-							colors={["#165B33"]}
 							loading={<LoadingSpinner />}
 						/>
 					)}
