@@ -48,7 +48,7 @@ function VariableChooserComponent({ Title, variables, children }) {
 
 	return (
 		<div className="flex flex-col space-y-2 p-4 max-w-4xl">
-			<h3 className="text-2xl font-bold mb-2">{Title}</h3>
+			<h3 className="text-1xl font-bold mb-2 text-center">{Title}</h3>
 			{variables.length > 1 && (
 				<select
 					value={selectedVariable}

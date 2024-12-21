@@ -1,7 +1,7 @@
 function worldCupLDA() {
 	return (
 		<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
-			<h3 className="text-2xl font-bold mb-2">Fifa World Cup LDA</h3>
+			<h3 className="text-2xl font-bold mb-2">FIFA World Cup LDA</h3>
 			<p>
 				Delving into the FIFA World Cup section of our analysis, our{" "}
 				<strong>LDA</strong> model uncovered a rich tapestry of themes
