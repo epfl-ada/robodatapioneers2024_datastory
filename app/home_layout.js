@@ -157,18 +157,6 @@ function Footer() {
 						))}
 					</div>
 				</div>
-				<div className="mb-8">
-					<h2 className="text-2xl font-bold mb-4 text-center">
-						References
-					</h2>
-					<div className="flex flex-wrap justify-center gap-4">
-						{references.map((ref, index) => (
-							<div key={index} className="text-center p-2">
-								<p className="text-blue-100">{ref}</p>
-							</div>
-						))}
-					</div>
-				</div>
 				<div className="text-center border-t border-green2-400 pt-4">
 					<p>© 2024 robodatapioneers2024. All rights reserved.</p>
 				</div>

@@ -168,7 +168,7 @@ export default function Home() {
                     As sports content on YouTube continues to grow, it becomes a vital indicator of global sports trends and fan interests. Below, our initial plots show the delta views, subs, and videos of various sports channels over the years, illustrating the evolving patterns of viewer engagement."
 				></SubTitleText>
 				<VariableChooserComponent
-					title=""
+					Title="Number of videos per sport"
 					variables={[
 						{
 							datapath:
@@ -197,7 +197,7 @@ export default function Home() {
 				</VariableChooserComponent>
 				<Paragraph text="Next, let’s delve into the distribution of different sports within the YouTube community. "></Paragraph>
 				<VariableChooserComponent
-					title="Line plot of delta view"
+					Title="Number of videos per sport"
 					variables={[
 						{
 							datapath:
@@ -422,7 +422,7 @@ export default function Home() {
 					{(variable) => (
 						<BarPlotChart
 							datapath={variable}
-							colors={["#97bd88", "#e8e791",]}
+							colors={["#97bd88", "#e8e791"]}
 							loading={<LoadingSpinner />}
 						/>
 					)}
