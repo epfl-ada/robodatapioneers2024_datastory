@@ -30,6 +30,8 @@ export default {
 				sans: ["var(--font-geist-sans)"],
 				mono: ["var(--font-geist-mono)"],
 				monoton: ["var(--font-monoton)"],
+				manrope: ["var(--font-manrope)"],
+				rowdies: ["var(--font-rowdies)"],
 			},
 		},
 	},

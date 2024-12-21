@@ -85,7 +85,7 @@ function LandingPage() {
                 className="absolute inset-0 w-full h-full opacity-50"
             ></canvas>
             <div className="absolute inset-0 flex items-center justify-center px-20">
-                <h1 className="text-8xl text-black text-center font-monoton">
+                <h1 className="text-[10rem] text-black text-center font-rowdies">
                     Game-changer
                 </h1>
             </div>

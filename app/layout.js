@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono, Monoton, Manrope } from "next/font/google";
+import { Geist, Geist_Mono, Monoton, Manrope, Rowdies } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -22,6 +22,12 @@ const manrope = Manrope({
   subsets: ["latin"],
 })
 
+const rowdies = Rowdies({
+  variable: "--font-rowdies",
+  subsets: ["latin"],
+  weight: ["300", "400", "700"]
+})
+
 export const metadata = {
 	title: "Game-changer: How do the major sports events influence YouTube engagement?",
 	description: "Created by Robodatapioneers2024",
@@ -31,7 +37,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${monoton.variable} ${manrope.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${monoton.variable} ${manrope.variable} ${rowdies.variable} antialiased`}
       >
         {children}
       </body>
