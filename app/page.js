@@ -242,7 +242,6 @@ export default function Home() {
 						]}
 					/>
 				</div>
-				<p>woeifjoqiwejf</p>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl">
 					<p className="text-lg text-left">
 						Take a closer look at the word cloud—do you spot words
