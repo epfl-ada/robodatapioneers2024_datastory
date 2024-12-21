@@ -165,7 +165,7 @@ export default function Home() {
 
                     Major sporting events trigger a significant surge in YouTube activity. For instance, during the FIFA World Cup, sports channels see a massive influx of views and uploads, reflecting global excitement and engagement. Similarly, the Olympics and NBA Finals generate waves of content that capture every thrilling moment, behind-the-scenes action, and fan interaction. This digital amplification not only enhances the real-time experience of these events but also extends their reach, allowing fans from all corners of the world to participate in the excitement.
 
-                    As sports content on YouTube continues to grow, it becomes a vital indicator of global sports trends and fan interests. Below, our first plot showcases the delta views of various sports channels over the years, illustrating the evolving patterns of viewer engagement."
+                    As sports content on YouTube continues to grow, it becomes a vital indicator of global sports trends and fan interests. Below, our initial plots show the delta views, subs, and videos of various sports channels over the years, illustrating the evolving patterns of viewer engagement."
 				></SubTitleText>
 				<VariableChooserComponent
 					title=""
