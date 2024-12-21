@@ -76,7 +76,7 @@ function LandingPage() {
     return (
         <div className="relative w-full h-screen">
             <img
-                src="landing_page_image.webp"
+                src="landing_page_2.webp"
                 alt="Background"
                 className="absolute inset-0 w-full h-full object-cover"
             />
