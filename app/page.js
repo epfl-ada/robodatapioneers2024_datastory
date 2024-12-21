@@ -699,7 +699,7 @@ export default function Home() {
 					</p>
 				</div>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
-					<h3 className="text-1xl font-bold mb-2">
+					<h3 className="text-2xl font-bold mb-2">
 						Difference in difference
 					</h3>
 					<p>
@@ -722,7 +722,7 @@ export default function Home() {
 						to increased engagement in their respective sports.
 					</p>
 					<p>
-						<strong>Football and Skiing:</strong>
+						<strong>Football and Skiing: </strong>
 						These two sports show the most significant impact from
 						their events, as the graphs clearly demonstrate.
 						However, when examining the p-values, football shows all
@@ -739,7 +739,7 @@ export default function Home() {
 						sustain for long after the Winter Olympics.
 					</p>
 					<p>
-						<strong>Basketball, Hockey, and Rugby:</strong>
+						<strong>Basketball, Hockey, and Rugby: </strong>
 						For these sports, the events did not show a substantial
 						increase in engagement. Particularly surprising was the
 						lack of change in engagement after the NBA Finals.
