@@ -69,47 +69,38 @@ function worldCupLDA() {
 				For instance, some of the top-performing videos in this category
 				include:
 			</p>
-			<ul className="list-disc list-inside text-lg text-left pl-4">
+			<ul className="list-disc list-inside text-base text-left pl-4 italic">
 				<li>
-					<strong>
-						&quot;UK EXCLUSIVE! COLE LIMITED EDITION ☆ STARTER PACK
+					&quot;UK EXCLUSIVE! COLE LIMITED EDITION ☆ STARTER PACK
 						☆ ADRENALYN XL 2014 FIFA WORLD CUP TCG panini&quot;
-					</strong>
+
 					: Showcases exclusive starter packs, attracting collectors
 					eager to obtain limited editions.
 				</li>
 				<li>
-					<strong>
-						&quot;100% COMPLETE panini ADRENALYN XL OFFICIAL FIFA
+					&quot;100% COMPLETE panini ADRENALYN XL OFFICIAL FIFA
 						WORLD CUP 2014 (UK EDITION) Trading Card Game&quot;
-					</strong>
 					: Offers a comprehensive look at official trading card
 					games, appealing to enthusiasts seeking complete
 					collections.
 				</li>
 				<li>
-					<strong>
 						&quot;premium card packs from Adrenalyn XL Road to
 						Russia 2018 Fifa World Cup Russia inc limited
 						editions&quot;
-					</strong>
 					: Highlights premium and limited-edition card packs,
 					emphasizing the exclusivity and collectible value.
 				</li>
 				<li>
-					<strong>
-						&quot;COLLECTOR TIN ☆ UK EDITION ☆ panini ADRENALYN XL
+					&quot;COLLECTOR TIN ☆ UK EDITION ☆ panini ADRENALYN XL
 						FIFA WORLD CUP 2014 Trading Cards ☆ opening&quot;
-					</strong>
 					: Provides an engaging unboxing experience, allowing fans to
 					witness the excitement of opening collector tins and
 					discovering rare cards.
 				</li>
 				<li>
-					<strong>
-						&quot;UNBOXING BOOSTER BOX (70 packs!) ADRENALYN XL 2014
+					&quot;UNBOXING BOOSTER BOX (70 packs!) ADRENALYN XL 2014
 						FIFA WORLD CUP trading cards panini&quot;
-					</strong>
 					: Captures the thrill of unboxing multiple booster packs,
 					appealing to both seasoned collectors and newcomers.
 				</li>
