@@ -422,7 +422,8 @@ export default function Home() {
 				>
 					{(variable) => (
 						<BarPlotChart
-							dataPath={variable}
+							datapath={variable}
+							colors={["#97bd88", "#e8e791",]}
 							loading={<LoadingSpinner />}
 						/>
 					)}
@@ -848,7 +849,8 @@ export default function Home() {
 				</div>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<h2 className="text-2xl font-bold mb-2">
-						Analysis on FIFA World Cup 2018, NBA Finals 2019 and Boxing Game 2015
+						Analysis on FIFA World Cup 2018, NBA Finals 2019 and
+						Boxing Game 2015
 					</h2>
 					<p>
 						In the FIFA World Cup analysis, the largest group,
