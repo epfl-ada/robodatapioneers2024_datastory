@@ -18,7 +18,7 @@ import { IframeChart } from "./iframe_charts.js";
 import { BubbleChart } from "./bubble_chart.js";
 import { SankeyChart } from "./sankey_chart.js";
 import { LineDottedPlotChart } from "./line_chart_dotted.js";
-import { worldCupLDA, olympicLDA, nbaLDA } from "./lda_texts.js"
+import { worldCupLDA, olympicLDA, nbaLDA } from "./lda_texts.js";
 
 function SubTitleText({ title, text }) {
 	return (
@@ -329,12 +329,6 @@ export default function Home() {
 						/>
 					)}
 				</VariableChooserComponent>
-				<RacingChartComponent
-					dataPath={"data/third_plot/sport_transit.csv"}
-					xName={"Number of videos"}
-					yName={"Sport category"}
-					loading={<LoadingSpinner />}
-				/>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<h3 className="text-1xl font-bold mb-2">
 						Shifting Sentiments in Sports Video Titles
@@ -494,7 +488,15 @@ export default function Home() {
 						most with millions of viewers.
 					</p>
 				</div>
-				wordcloud images
+				<VariableChooserComponentImage
+					Title=""
+					variables={[
+						{
+							datapath: "data/word_clouds/world_cup_cloud.webp",
+							name: "World cup wordcloud",
+						},
+					]}
+				></VariableChooserComponentImage>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<p>
 						Beyond the dominant words like "world," "cup," and
@@ -516,7 +518,15 @@ export default function Home() {
 						pivotal moments and standout performances.
 					</p>
 				</div>
-				olympic wordcloud
+				<VariableChooserComponentImage
+					Title=""
+					variables={[
+						{
+							datapath: "data/word_clouds/olympic_cloud.webp",
+							name: "Olympics wordcloud",
+						},
+					]}
+				></VariableChooserComponentImage>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<p>
 						Our word cloud analysis for Olympic videos highlights
@@ -532,7 +542,15 @@ export default function Home() {
 						performances.
 					</p>
 				</div>
-				nba word
+				<VariableChooserComponentImage
+					Title=""
+					variables={[
+						{
+							datapath: "data/word_clouds/nba_cloud.webp",
+							name: "NBA wordcloud",
+						},
+					]}
+				></VariableChooserComponentImage>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<p>
 						Our word cloud analysis of NBA-related videos highlights
