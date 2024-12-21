@@ -61,7 +61,7 @@ function BarPlotChart({ datapath, colors, barmode="group" }) {
                     },
                 }))}
                 layout={{
-                    title: "Bar Chart",
+                    title: "",
                     xaxis: { title: { text: columns[0] } },
                     yaxis: { title: { text: columns[1] } },
                     bargap: 0.2,
