@@ -78,7 +78,7 @@ function VariableChooserComponentLDA({ Title, variables, children }) {
 
 	return (
 		<div className="flex justify-center w-full max-w-7xl align-center flex-col">
-			<h3 className="text-2xl font-bold mb-2 text-center">{Title}</h3>
+			<h3 className="text-1xl font-bold mb-2 text-center">{Title}</h3>
 			{variables.length > 1 && (
 				<select
 					value={selectedVariable}
@@ -233,7 +233,7 @@ export default function Home() {
 				</div>
 				<div>
 					<VariableChooserComponentImage
-						Title="Wordcloud for all tags in sports videos"
+						Title=""
 						variables={[
 							{
 								datapath: "sports_wordcloud.png",
@@ -636,7 +636,6 @@ export default function Home() {
 						real-time sports coverage and fan interaction.
 					</p>
 				</div>
-				fqoijfoqwjefi
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<h1 className="text-3xl font-bold mb-2">
 						<strong>Part 3: Sport-Specific Focus</strong>
@@ -945,137 +944,6 @@ export default function Home() {
 						communities.
 					</p>
 				</div>
-				<SubTitleText
-					title="Create Next App"
-					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
-				/>
-				<SubTitleText
-					title="Create Next App"
-					text="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam autem quibusdam, delectus in corrupti, ab impedit magni iure eveniet aliquid soluta neque quisquam ducimus dolores ex suscipit pariatur. Voluptatibus, exercitationem? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis repellat iure tenetur similique nemo soluta velit voluptate."
-				/>
-				<BubbleChartComponent loading={<LoadingSpinner />} />
-				<VariableChooserComponent
-					Title="Box plot of delta view"
-					variables={[
-						{
-							datapath: "data/boxplot_data.csv",
-							name: "Views",
-						},
-						{
-							datapath: "data/boxplot_data2.csv",
-							name: "Videos",
-						},
-					]}
-				>
-					{(variable) => (
-						<BarPlotChart
-							datapath={variable}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponent>
-				<VariableChooserComponent
-					Title="Line plot of delta view"
-					variables={[
-						{
-							datapath: "data/barplot_data.csv",
-							name: "Delta Subs",
-						},
-					]}
-				>
-					{(variable) => (
-						<BarPlotChart
-							datapath={variable}
-							colors={[
-								"#165B33",
-								"#FF5733",
-								"#33FF57",
-								"#3357FF",
-							]}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponent>
-				<VariableChooserComponentLDA
-					Title="Topic modeling LDA"
-					variables={[
-						{
-							datapath: "lda_world_cup_football.html",
-							name: "LDA World Cup Football",
-						},
-						{
-							datapath: "lda_olympics.html",
-							name: "LDA Olympics",
-						},
-						{
-							datapath: "lda_nba.html",
-							name: "LDA NBA",
-						},
-					]}
-				>
-					{(variable) => (
-						<IframeChart
-							src={variable}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponentLDA>
-				<VariableChooserComponent
-					Title="Line plot of delta view"
-					variables={[
-						{
-							datapath:
-								"data/second_plot/fre_popular_sports_tags.csv",
-							name: "Delta Subs",
-						},
-					]}
-				>
-					{(variable) => (
-						<HeatMapChart
-							datapath={variable}
-							colors={["#165B33"]}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponent>
-				<VariableChooserComponent
-					Title="User comment flow chart for soccer before and after World Cup 2018"
-					variables={[
-						{
-							datapath: "data/sankey_plot/sankey_diagram_.json",
-							name: "Sankey soccer",
-						},
-					]}
-				>
-					{(variable) => (
-						<SankeyChart
-							dataPath={variable}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponent>
-				<VariableChooserComponent
-					Title="Line plot of delta view"
-					variables={[
-						{
-							datapath: "data/lineplot_data.csv",
-							name: "LIne Chart",
-						},
-					]}
-				>
-					{(variable) => (
-						<LineDottedPlotChart
-							datapath={variable}
-							colors={[
-								"#165B33",
-								"#FF5733",
-								"#33FF57",
-								"#3357FF",
-							]}
-							loading={<LoadingSpinner />}
-						/>
-					)}
-				</VariableChooserComponent>
 			</main>
 			<Footer />
 		</>
