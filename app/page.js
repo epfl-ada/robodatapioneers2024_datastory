@@ -523,7 +523,7 @@ export default function Home() {
 					variables={[
 						{
 							datapath: "data/word_clouds/olympic_cloud.webp",
-							name: "Olympics wordcloud",
+							name: "Olympicsg wordcloud",
 						},
 					]}
 				></VariableChooserComponentImage>
@@ -849,7 +849,7 @@ export default function Home() {
 				</div>
 				<div className="flex flex-col space-y-2 p-4 w-full max-w-4xl  text-lg text-left">
 					<h2 className="text-2xl font-bold mb-2">
-						FIFA World Cup 2018 Analysis
+						Analysis on FIFA World Cup 2018, NBA Finals 2019 and Boxing Game 2015
 					</h2>
 					<p>
 						In the FIFA World Cup analysis, the largest group,
@@ -894,21 +894,21 @@ export default function Home() {
 					</p>
 				</div>
 				<VariableChooserComponent
-					Title="User comment flow chart for soccer before and after World Cup 2018"
+					Title="Sankey user comment flow chart"
 					variables={[
 						{
 							datapath: "data/sankey_plot/sankey_diagram_.json",
-							name: "Sankey soccer",
+							name: "FIFA World Cup 2018",
 						},
 						{
 							datapath:
 								"data/sankey_plot/sankey_diagram_basketball_2019.json",
-							name: "Sankey basketball",
+							name: "NBA Finals 2019",
 						},
 						{
 							datapath:
 								"data/sankey_plot/sankey_diagram_boxing_2015.json",
-							name: "Sankey boxing",
+							name: "Boxing game 2015",
 						},
 					]}
 				>
